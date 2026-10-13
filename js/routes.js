@@ -1,7 +1,7 @@
 
-routes = {
-  "statyspanarna": {
-    title: "Statyspanarna",
+export const routes = {
+  "statyrundan": {
+    title: "Statyrundan",
     description: "Historiska personer och berättelser mitt i Växjö.",
     artworkIds: [
       "art-027",
@@ -17,8 +17,8 @@ routes = {
     ]
   },
 
-  "glas-glans-gator": {
-    title: "Glas, glans & gåtor",
+  "glas-glans": {
+    title: "Glas & Glans",
     description: "Färgstarka verk och spännande konstnärliga uttryck i centrum.",
     artworkIds: [
       "art-017",
@@ -38,8 +38,8 @@ routes = {
     ]
   },
 
-  "sjobris-skulpturspaning": {
-    title: "Sjöbris & skulpturspaning",
+  "sjobris-skulpturer": {
+    title: "Sjöbris & Skulpturer",
     description: "En upptäcktsfärd bland konstverk söder om stadskärnan.",
     artworkIds: [
       "art-001",
@@ -52,8 +52,8 @@ routes = {
     ]
   },
 
-  "trummens-hemligheter": {
-    title: "Trummens hemligheter",
+  "trummens-pärlor": {
+    title: "Trummens pärlor",
     description: "Skulpturer och konstverk i den östra delen av området.",
     artworkIds: [
       "art-020",

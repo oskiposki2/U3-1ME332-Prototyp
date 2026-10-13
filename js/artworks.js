@@ -1,4 +1,4 @@
-artworks = [
+export const artworks = [
   {
     id: "art-001",
     name: "Durus och Mollis (2008) Monika Gora",

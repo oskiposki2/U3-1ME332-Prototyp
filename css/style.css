@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap");
 
 * {
   box-sizing: border-box;
@@ -6,8 +6,8 @@
 
 body {
   margin: 0;
-  font-family: 'Manrope', sans-serif;
-  background-color: #F2EFE7;
+  font-family: "Manrope", sans-serif;
+  background-color: #f2efe7;
   color: #282624;
 }
 
@@ -34,6 +34,9 @@ body {
 }
 
 .start-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 110px;
   width: 350px;
   max-width: 100%;
@@ -47,6 +50,7 @@ body {
   font-size: 48px;
   font-weight: 700;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .language-selector {

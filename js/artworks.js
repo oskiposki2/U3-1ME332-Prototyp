@@ -469,4 +469,24 @@ export const artworks = [
     name: "Den svenska tanten (2005) Susanna Arwin",
     coordinates: [56.853638, 14.835111],
   },
+  {
+  id: "art-095",
+  name: "Pissed Elin (2017) Sara Möller",
+  coordinates: [56.862750, 14.813511]
+},
+{
+  id: "art-096",
+  name: "Alla är (2015) Torbjörn Johansson",
+  coordinates: [56.861356, 14.811147]
+},
+{
+  id: "art-097",
+  name: "Tetraedern (2018) Gunilla Bandolin",
+  coordinates: [56.86509, 14.83342]
+},
+{
+   id: "art-098",
+   name: "Modified Social Bench #11",
+   coordinates: [56.85821153038375, 14.830201329815674] 
+}
 ];

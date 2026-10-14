@@ -1,13 +1,31 @@
 <!doctype html>
-<html lang="en">
+<html lang="sv">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/map.js" type="module"></script>
-    <script src="js/map.js" type="module"></script>
     <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
   </head>
-  <body></body>
+  <body>
+    <main class="overview-page">
+      <header class="overview-header">
+        <a href="valj-rutt.html" class="back-link"> ← Tillbaka till rutter </a>
+      </header>
+
+      <section class="map-section">
+        <div id="map"></div>
+        <div>
+        <h1 id="route-title">Laddar rutt...</h1>
+        <p id="route-description"></p>
+        <div class="overview-meta" id="route-meta"></div>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>

@@ -1,34 +1,34 @@
-
 export const routes = {
-  "statyrundan": {
+  statyrundan: {
     title: "Statyrundan",
     description: "Historiska personer och berättelser mitt i Växjö.",
     artworkIds: [
-    "art-028",
-    "art-025",
-    "art-090",
-    "art-088",   
-    "art-082", 
-    "art-006", 
-    "art-031", 
-    "art-081",   
-    ]
+      "art-025",
+      "art-090",
+      "art-088",
+      "art-028",
+      "art-082",
+      "art-006",
+      "art-031",
+      "art-081",
+    ],
   },
 
-  "glas-glans": {
-    title: "Glas & Glans",
-    description: "Färgstarka verk och spännande konstnärliga uttryck i centrum.",
+  "konst-mellan-kvarteren": {
+    title: "Konst mellan kvarteren",
+    description: "Upptäck skulpturer, former och oväntad konst mitt i Växjö.",
     artworkIds: [
-      "art-019",
-      "art-013",
-      "art-012",
-      "art-017",
-      "art-018",
-      "art-011",
-      "art-015",
-      "art-016",
-      "art-014",
-    ]
+      "art-088", // Stämpelverket
+      "art-089", // Rörorkestern
+      "art-058", // Portal
+      "art-049", // Uttern
+      "art-065", // Slagbjörn
+      "art-030", // Jag tänker på mig själv
+      "art-037", // Citat i gatan
+      "art-025", // Tre bockar
+      "art-080", // Najad
+      "art-024", // Granitmonolit
+    ],
   },
 
   "sjobris-skulpturer": {
@@ -44,7 +44,7 @@ export const routes = {
       "art-003",
       "art-002",
       "art-022",
-    ]
+    ],
   },
 
   "trummens-pärlor": {
@@ -63,6 +63,6 @@ export const routes = {
       "art-033",
       "art-035",
       "art-045",
-    ]
-  }
+    ],
+  },
 };

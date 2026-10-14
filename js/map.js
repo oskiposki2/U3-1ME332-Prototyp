@@ -1,5 +1,7 @@
 import { artworks } from "./artworks.js";
 import { routes } from "./routes.js";
+import { ORS_API_KEY } from "./api.js";
+
 
 
 const sheet = document.querySelector("#artwork-sheet");
@@ -98,6 +100,77 @@ const positions = [
   ...selectedArtworks.map(artwork => artwork.coordinates)
 ];
 
-map.fitBounds(positions, {
-  padding: [40, 40]
-});
+
+async function drawWalkingRoute() {
+  // Start vid skärmen, genom konstverken och tillbaka.
+  // Leaflet använder [latitud, longitud].
+const waypoints = [
+  screenPosition,
+  ...selectedArtworks.map(artwork => artwork.coordinates)
+];
+
+  // OpenRouteService kräver [longitud, latitud].
+  const coordinates = waypoints.map(([lat, lon]) => [lon, lat]);
+
+  try {
+    const response = await fetch(
+      "https://api.heigit.org/openrouteservice/v2/directions/foot-walking/geojson",
+      {
+        method: "POST",
+        headers: {
+          "Authorization": ORS_API_KEY,
+          "Content-Type": "application/json",
+          "Accept": "application/geo+json, application/json"
+        },
+        body: JSON.stringify({ coordinates })
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Routingfel: ${response.status} ${await response.text()}`);
+    }
+
+    const geojson = await response.json();
+
+    // Rita gångvägen längs det verkliga gångvägsnätet.
+    const routeLayer = L.geoJSON(geojson, {
+      style: {
+        color: "#fd6666",
+        weight: 5,
+        opacity: 0.85
+      }
+    }).addTo(map);
+
+    // Visa hela gångvägen.
+    map.fitBounds(routeLayer.getBounds(), {
+      padding: [40, 40]
+    });
+
+    // Visa faktisk sträcka och beräknad tid om API:t returnerar dem.
+    const summary = geojson.features?.[0]?.properties?.summary;
+
+    if (summary && metaElement) {
+      const distance = document.createElement("span");
+      distance.textContent =
+        `${(summary.distance / 1000).toLocaleString("sv-SE", {
+          maximumFractionDigits: 1
+        })} km`;
+
+      const duration = document.createElement("span");
+      duration.textContent =
+        `Ca ${Math.round(summary.duration / 60)} min`;
+
+      metaElement.append(distance, duration);
+    }
+  } catch (error) {
+    console.error("Kunde inte beräkna gångrutten:", error);
+
+    // Visa åtminstone alla stopp om routingtjänsten inte fungerar.
+    map.fitBounds(waypoints, {
+      padding: [40, 40]
+    });
+  }
+}
+
+drawWalkingRoute();
+

@@ -81,7 +81,7 @@ L.marker(screenPosition)
 // Lägg till numrerade markörer för konstverken
 selectedArtworks.forEach((artwork, index) => {
   const icon = L.divIcon({
-    className: "artwork-marker-icon",
+    className: index === 0 ? "artwork-marker-icon marker-hint" : "artwork-marker-icon",
     html: `<span>${index + 1}</span>`,
     iconSize: [36, 36],
     iconAnchor: [18, 18]

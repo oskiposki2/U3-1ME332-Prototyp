@@ -1,22 +1,38 @@
 export const artworks = [
   {
     id: "art-001",
-    name: "Durus och Mollis (2008) Monika Gora",
+    title: "Durus och Mollis",
+    artist: "Monika Gora",
+    year: 2008,
+    description:
+      "Två mjukt formade fantasigestalter vid Växjösjön. De är tänkta att samspela med träden, sjön och människorna som passerar. Verken lyser också under dygnets mörka timmar.",
     coordinates: [56.875173, 14.809602],
   },
   {
     id: "art-002",
-    name: "In the Shade of the Sun (2012) Roland Persson",
+    title: "In the Shade of the Sun",
+    artist: "Roland Persson",
+    year: 2012,
+    description:
+      "En skulpturgrupp på Kampaängen med ett stort parasoll och vardagliga föremål gestaltade i brons. Verket är tänkt som en plats att stanna och sitta en stund. Det uppmärksammar mångfald, medmänsklighet och erfarenheten av att bygga upp en tillvaro på en ny plats.",
     coordinates: [56.869755, 14.815086],
   },
   {
     id: "art-003",
-    name: "Minne av utvandringen till Minnesota (1992) Kenneth Johansson",
+    title: "Minne av utvandringen till Minnesota",
+    artist: "Kenneth Johansson",
+    year: 1992,
+    description:
+      "Ett minnesverk på Kampaängen som uppmärksammar utvandringen från Småland till Minnesota. Verket knyter an till den historiska erfarenheten av att lämna sin hembygd för att skapa ett nytt liv på en annan plats.",
     coordinates: [56.867196, 14.816652],
   },
   {
     id: "art-004",
-    name: "Spegelbollen (2010) Inges Idee",
+    title: "Spegelbollen",
+    artist: "Inges Idee",
+    year: 2010,
+    description:
+      "En glittrande speglande boll placerad i lagunen i Växjösjön. Den reflekterar himlen, vattnet, stranden och staden, så att omgivningen ständigt förändras i verkets yta. Skulpturen är en hyllning till sjön och dess vatten.",
     coordinates: [56.87004, 14.805923],
   },
   {
@@ -26,17 +42,28 @@ export const artworks = [
   },
   {
     id: "art-006",
-    name: "Carl von Linné (1909) John Börjeson",
+    title: "Carl von Linné",
+    artist: "John Börjeson",
+    year: 1909,
+    description:
+      "En byst av botanikern Carl von Linné, placerad sydväst om Växjö domkyrka. Linné studerade i Växjö från nio års ålder och avslutade sin gymnasietid här 1727.",
     coordinates: [56.876473, 14.810489],
   },
   {
     id: "art-007",
-    name: "Okänd titel (2007) Anne-Karin Furunes",
+    title: "Okänd titel",
+    artist: "Anne-Karin Furunes",
+    year: 2007,
+    description: "Det finns ingen ytterligare information om konstverket",
     coordinates: [56.862782, 14.820458],
   },
   {
     id: "art-008",
-    name: "Drinking tree (2011) Anna-Karin Arvidsson",
+    title: "Drinking Tree",
+    artist: "Anna-Karin Arvidsson",
+    year: 2011,
+    description:
+      "Ett silverblankt, stiliserat träd som växer upp ur en brunn. I stammen finns en vattenkran, som om trädet ger ifrån sig vatten på samma sätt som ett träd kan ge ifrån sig sav. Blå belysning förstärker verkets uttryck när det är mörkt.",
     coordinates: [56.872886, 14.80937],
   },
   {
@@ -56,7 +83,10 @@ export const artworks = [
   },
   {
     id: "art-012",
-    name: "Växtkraft (2011) Anna Ehrner",
+    title: "Växtkraft",
+    artist: "Anna Ehrner",
+    year: 2011,
+    description: "En glaskulptur inspirerad av Smålands natur och Växjös",
     coordinates: [56.87776, 14.80758],
   },
   {
@@ -101,12 +131,20 @@ export const artworks = [
   },
   {
     id: "art-021",
-    name: "Tvillingar (1994) Allan Jäderås",
+    title: "Tvillingar",
+    artist: "Björn Jäderås och Allan Jäderås",
+    year: 1994,
+    description:
+      "En bronsskulptur på strandpromenaden vid Växjösjön. Verket bygger på en liten sittande figur av Allan Jäderås som har förstorats, dubblerats och omarbetats.",
     coordinates: [56.873985, 14.815463],
   },
   {
     id: "art-022",
-    name: "Rörelse i granit (1995) Ian Newbery",
+    title: "Rörelse i granit",
+    artist: "Ian Newbery",
+    year: 1995,
+    description:
+      "Det finns ingen ytterligare information om konstverket",
     coordinates: [56.874135, 14.815606],
   },
   {
@@ -121,7 +159,11 @@ export const artworks = [
   },
   {
     id: "art-025",
-    name: "Tre bockar (1988) Kenneth Johansson",
+    title: "Tre bockar",
+    artist: "Kenneth Johansson",
+    year: 1988,
+    description:
+      "Ett offentligt konstverk av skulptören Kenneth Johansson i Växjö.",
     coordinates: [56.878774, 14.806116],
   },
   {
@@ -136,7 +178,11 @@ export const artworks = [
   },
   {
     id: "art-028",
-    name: "Arrangemang vid Dackes dröm (1994) Claes Hake",
+    title: "Arrangemang vid Dackes dröm",
+    artist: "Claes Hake",
+    year: 1994,
+    description:
+      "Ett konstverk som ligger i direkt anslutning till Dackes dröm av Carl Milles.",
     coordinates: [56.878086, 14.809863],
   },
   {
@@ -151,7 +197,11 @@ export const artworks = [
   },
   {
     id: "art-031",
-    name: "Peter Wieselgren (1934) Arvid Källström",
+    title: "Peter Wieselgren",
+    artist: "Arvid Källström",
+    year: 1934,
+    description:
+      "En staty vid Vattentorget föreställande prästen Peter Wieselgren. Han blev en betydelsefull förkämpe för nykterhetsrörelsen och var som ung student i Växjö med och bildade en nykterhetsförening 1819.",
     coordinates: [56.876012, 14.810448],
   },
   {
@@ -161,7 +211,11 @@ export const artworks = [
   },
   {
     id: "art-033",
-    name: "Princip (1999) Anna Tegeström Wolgers",
+    title: "Princip",
+    artist: "Anna Tegeström Wolgers",
+    year: 1999,
+    description:
+      "Ett konstverk som ibland kallas Trumpeten. Konstnären beskriver det som en bild av hur vi söker kunskap: tratten fångar upp information från omvärlden, medan mönstren på fundamentet för tankarna till kartor och en jordglob.",
     coordinates: [56.855028, 14.830528],
   },
   {
@@ -171,7 +225,11 @@ export const artworks = [
   },
   {
     id: "art-035",
-    name: "Hide & Seek (2005) Maria Miesenberger",
+    title: "Hide & Seek",
+    artist: "Maria Miesenberger",
+    year: 2005,
+    description:
+      "En skulptursvit i aluminium med gestalter som tycks gömma sig, smyga eller krypa. Titeln anknyter till kurragömmalek och barndomens minnen, samtidigt som figurerna kan ge associationer till att söka skydd eller försöka fly.",
     coordinates: [56.853806, 14.8325],
   },
   {
@@ -186,7 +244,11 @@ export const artworks = [
   },
   {
     id: "art-038",
-    name: "Famn (2013) Solbritt Forsling-Jörpeland",
+    title: "Famn",
+    artist: "Solbritt Forsling-Jörpeland",
+    year: 2013,
+    description:
+      "Ett betongverk som är skapat av Solbritt Jörpeland. Verkets konstnärliga idé behöver verifieras innan en mer detaljerad beskrivning används.",
     coordinates: [56.86229, 14.807026],
   },
   {
@@ -211,17 +273,28 @@ export const artworks = [
   },
   {
     id: "art-043",
-    name: "Boken (1997) Lars Sonerud",
+    title: "Boken",
+    artist: "Lars Sonerud",
+    year: 1997,
+    description:
+      "Ett stort, bokformat konstverk på campus med omkring 100 citat från författare och vetenskapsmän. Citaten kommer från olika tider och kunskapsområden och gör verket till en hyllning till litteratur, idéer och kunskap.",
     coordinates: [56.855611, 14.830083],
   },
   {
     id: "art-044",
-    name: "Skog (2006) Mikael Göransson",
+    title: "Skog",
+    artist: "Mikael Göransson",
+    year: 2006,
+    description: "Det finns ingen ytterligare information om konstverket",
     coordinates: [56.855389, 14.830528],
   },
   {
     id: "art-045",
-    name: "Rävdamen (2005) Katarina Lönnby",
+    title: "Rävdamen",
+    artist: "Katarina Lönnby",
+    year: 2005,
+    description:
+      "En utomhusskulptur i brons och metall med en grönpatinerad yta.",
     coordinates: [56.853222, 14.830278],
   },
   {
@@ -391,7 +464,11 @@ export const artworks = [
   },
   {
     id: "art-079",
-    name: "Tippen (2014) Gunilla Bandolin",
+    title: "Tippen",
+    artist: "Gunilla Bandolin",
+    year: 2014,
+    description:
+      "Ett storskaligt landskapsverk vid Trummens södra strand. Det består av flera gräsklädda kullar i olika storlekar som besökare kan klättra upp på. Verket är tänkt att användas och upplevas, inte bara betraktas.",
     coordinates: [56.858345, 14.827212],
   },
   {
@@ -401,12 +478,20 @@ export const artworks = [
   },
   {
     id: "art-081",
-    name: "Vilhelm Moberg (1997) Oliver Weerasinghe",
+    title: "Vilhelm Moberg",
+    artist: "Oliver Weerasinghe",
+    year: 1997,
+    description:
+      "Ett porträtthuvud av författaren Vilhelm Moberg i parkområdet vid Gamla domprostgården. Moberg är framför allt känd för Utvandrarna, romansviten om människor från Småland som emigrerar till Nordamerika.",
     coordinates: [56.875797, 14.808972],
   },
   {
     id: "art-082",
-    name: "Sankt Sigfrid och hans tre systersöner (1999) Peter Linde",
+    title: "Sankt Sigfrid och hans tre systersöner",
+    artist: "Peter Linde",
+    year: 1999,
+    description:
+      "Skulpturgruppen står vid Växjö domkyrkas huvudentré. Den föreställer Sankt Sigfrid och hans tre systersöner, som enligt traditionen följde honom under hans missionsresor när han spred kristendomen i Sverige.",
     coordinates: [56.877349, 14.811297],
   },
   {
@@ -436,7 +521,10 @@ export const artworks = [
   },
   {
     id: "art-088",
-    name: "Stämpelverket (1971) Stefan Thorén",
+    title: "Stämpelverket",
+    artist: "Stefan Thorén",
+    year: 1971,
+    description: "Det finns ingen ytterligare information om konstverket",
     coordinates: [56.879742, 14.810618],
   },
   {
@@ -446,7 +534,11 @@ export const artworks = [
   },
   {
     id: "art-090",
-    name: "Dacke håller ting i Växjö (1960) Bengt Edenfalk",
+    title: "Dacke håller ting i Växjö",
+    artist: "Bengt Edenfalk",
+    year: 1960,
+    description:
+      "En mosaik på Klostergatan som anknyter till Nils Dacke. Han ledde Smålandsupproret mot Gustav Vasa 1542, en konflikt som kommit att kallas Dackefejden.",
     coordinates: [56.880353, 14.807689],
   },
   {
@@ -470,23 +562,35 @@ export const artworks = [
     coordinates: [56.853638, 14.835111],
   },
   {
-  id: "art-095",
-  name: "Pissed Elin (2017) Sara Möller",
-  coordinates: [56.862750, 14.813511]
-},
-{
-  id: "art-096",
-  name: "Alla är (2015) Torbjörn Johansson",
-  coordinates: [56.861356, 14.811147]
-},
-{
-  id: "art-097",
-  name: "Tetraedern (2018) Gunilla Bandolin",
-  coordinates: [56.86509, 14.83342]
-},
-{
-   id: "art-098",
-   name: "Modified Social Bench #11",
-   coordinates: [56.85821153038375, 14.830201329815674] 
-}
+    id: "art-095",
+    title: "Pissed Elin",
+    artist: "Sara Möller",
+    year: 2017,
+    description:
+      "En cirka tre meter hög fontän i brons, formad efter en modell i lera. Verket hyllar Elin Wägners kamp för feminism, pacifism och ekologi. Vattenflödet och den oväntade formen utmanar normer och symboliserar växtkraft och rätten att ta plats.",
+    coordinates: [56.86275, 14.813511],
+  },
+  {
+    id: "art-096",
+    title: "Alla är",
+    artist: "Torbjörn Johansson",
+    year: 2015,
+    description:
+      "Små gestalter i brons och ek bygger på konstnärens egen familj och dess olika åldrar, språk och erfarenheter. Genom kroppsspråk och gester utforskar verket kommunikation, tillhörighet och människors möjligheter att förstå varandra.",
+    coordinates: [56.861356, 14.811147],
+  },
+  {
+    id: "art-097",
+    name: "Tetraedern (2018) Gunilla Bandolin",
+    coordinates: [56.86509, 14.83342],
+  },
+  {
+    id: "art-098",
+    title: "Modified Social Bench #11",
+    artist: "Jeppe Hein",
+    year: 2013,
+    description:
+      "Jeppe Hein utgår från den välbekanta parkbänken men förändrar dess traditionella form. Bänken blir mer än en plats att sitta på: den uppmuntrar människor att interagera med konstverket och varandra. Genom lekfulla former vill Hein skapa oväntade möten, väcka nyfikenhet och göra vardagsmiljön till en plats för samtal och gemenskap.",
+    coordinates: [56.85821153038375, 14.830201329815674],
+  },
 ];

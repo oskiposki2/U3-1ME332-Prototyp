@@ -1,6 +1,39 @@
-
 import { artworks } from "./artworks.js";
 import { routes } from "./routes.js";
+
+
+const sheet = document.querySelector("#artwork-sheet");
+const closeButton = document.querySelector("#sheet-close");
+const backdrop = document.querySelector("#sheet-backdrop");
+
+const sheetTitle = document.querySelector("#sheet-title");
+const sheetArtist = document.querySelector("#sheet-artist");
+const sheetYear = document.querySelector("#sheet-year");
+const sheetDescription = document.querySelector("#sheet-description");
+
+function showArtwork(artwork) {
+  sheetTitle.textContent = artwork.title || artwork.name || "Namnlöst konstverk";
+  sheetArtist.textContent = "Konstnär: " + artwork.artist;
+  sheetYear.textContent = "År: " + artwork.year;
+  sheetDescription.textContent = artwork.description;
+
+  sheet.classList.add("is-open");
+  backdrop.classList.add("is-open");
+
+  sheet.setAttribute("aria-hidden", "false");
+  backdrop.setAttribute("aria-hidden", "false");
+}
+
+function closeArtwork() {
+  sheet.classList.remove("is-open");
+  backdrop.classList.remove("is-open");
+
+  sheet.setAttribute("aria-hidden", "true");
+  backdrop.setAttribute("aria-hidden", "true");
+}
+
+closeButton.addEventListener("click", closeArtwork);
+backdrop.addEventListener("click", closeArtwork);
 
 // Den publika skärmens ungefärliga position
 const screenPosition = [56.87852, 14.80935];
@@ -52,9 +85,11 @@ selectedArtworks.forEach((artwork, index) => {
     iconAnchor: [18, 18]
   });
 
-  L.marker(artwork.coordinates, { icon })
-    .addTo(map)
-    .bindPopup(`${index + 1}. ${artwork.name}`);
+const marker = L.marker(artwork.coordinates, { icon }).addTo(map);
+
+marker.on("click", () => {
+  showArtwork(artwork);
+});
 });
 
 // Anpassa kartvyn så att skärmen och konstverken syns

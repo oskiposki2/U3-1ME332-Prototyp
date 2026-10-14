@@ -231,3 +231,87 @@ body {
     font-weight: 700;
     box-shadow: 0 2px 8px #0003;
 }
+
+
+.artwork-sheet {
+    position: fixed;
+    z-index: 1000;
+    bottom: 1px;
+    left: 50%;
+    width: min(680px, calc(100% - 40px));
+    min-height: 80vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 24px 32px 32px;
+    background: #f2efe7;
+    color: #282624;
+    border-radius: 20px 20px 0px 0px;
+    box-shadow: 0 8px 40px #0002;
+
+    transform: translate(-50%, calc(100% + 40px));
+    visibility: hidden;
+    transition:
+        transform 350ms ease,
+        visibility 350ms ease;
+}
+
+.artwork-sheet.is-open {
+    transform: translate(-50%, 0);
+    visibility: visible;
+}
+
+.sheet-handle {
+    width: 42px;
+    height: 5px;
+    margin: 0 auto 20px;
+    background: #c9c4bb;
+    border-radius: 10px;
+}
+
+.sheet-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    border: none;
+    background: transparent;
+    color: #282624;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.sheet-label {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+}
+
+.sheet-content h2 {
+    margin: 8px 40px 12px 0;
+    font-size: 30px;
+}
+
+.sheet-artist,
+.sheet-year,
+.sheet-description {
+    line-height: 1.6;
+}
+
+.sheet-artist {
+    font-weight: 600;
+}
+
+.sheet-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(40, 38, 36, 0.5);
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 350ms ease, visibility 350ms ease;
+}
+
+.sheet-backdrop.is-open {
+    opacity: 1;
+    visibility: visible;
+}

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Ruttöversikt</title>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/map.js" type="module"></script>
     <link rel="stylesheet" href="css/style.css" />
@@ -21,11 +21,33 @@
       <section class="map-section">
         <div id="map"></div>
         <div>
-        <h1 id="route-title">Laddar rutt...</h1>
-        <p id="route-description"></p>
-        <div class="overview-meta" id="route-meta"></div>
+          <h1 id="route-title">Laddar rutt...</h1>
+          <p id="route-description"></p>
+          <div class="overview-meta" id="route-meta"></div>
         </div>
       </section>
+
+      <div class="sheet-backdrop" id="sheet-backdrop" aria-hidden="true"></div>
+
+      <div class="artwork-sheet" id="artwork-sheet" aria-hidden="true">
+        <div class="sheet-handle"></div>
+
+        <button
+          class="sheet-close"
+          id="sheet-close"
+          aria-label="Stäng konstverksinformationen"
+        >
+          ×
+        </button>
+
+        <div class="sheet-content">
+          <h2 id="sheet-title"></h2>
+
+          <p class="sheet-artist" id="sheet-artist"></p>
+          <p class="sheet-year" id="sheet-year"></p>
+          <p class="sheet-description" id="sheet-description"></p>
+        </div>
+      </div>
     </main>
   </body>
 </html>

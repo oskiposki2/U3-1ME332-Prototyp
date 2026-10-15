@@ -383,7 +383,7 @@ body {
 .artwork-marker-icon.marker-hint span::after {
   content: "";
   position: absolute;
-  inset: -8px;
+  inset: -6px;
   border: 6px dashed #ff0000;
   border-radius: 50%;
   pointer-events: none;

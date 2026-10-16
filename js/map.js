@@ -7,6 +7,7 @@ import { ORS_API_KEY } from "./api.js";
 const sheet = document.querySelector("#artwork-sheet");
 const closeButton = document.querySelector("#sheet-close");
 const backdrop = document.querySelector("#sheet-backdrop");
+const takeRouteButton = document.querySelector("#take-route-button");
 
 const sheetTitle = document.querySelector("#sheet-title");
 const sheetArtist = document.querySelector("#sheet-artist");
@@ -44,6 +45,12 @@ const screenPosition = [56.87852, 14.80935];
 const params = new URLSearchParams(window.location.search);
 const routeId = params.get("route") || "statyrundan";
 const route = routes[routeId] || routes["statyrundan"];
+
+// Ge rätt URL till QR-sidan
+if (takeRouteButton) {
+  takeRouteButton.href =
+    `qr.html?route=${encodeURIComponent(routeId)}`;
+}
 
 // Visa information om rutten
 document.querySelector("#route-title").textContent = route.title;
@@ -135,7 +142,7 @@ const waypoints = [
     // Rita gångvägen längs det verkliga gångvägsnätet.
     const routeLayer = L.geoJSON(geojson, {
       style: {
-        color: "#fd6666",
+        color: "#0e36ff",
         weight: 5,
         opacity: 0.85
       }

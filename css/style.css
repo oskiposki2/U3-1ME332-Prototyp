@@ -81,13 +81,9 @@ body {
 /* Välj rutt */
 
 .route-page {
-  max-width: 1300px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 48px;
-}
-
-.route-header {
-  margin-bottom: 48px;
+  padding: 25px;
 }
 
 .back-link {
@@ -178,7 +174,7 @@ body {
 .overview-page {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 40px 48px;
+  padding: 25px;
 }
 
 .overview-header {
@@ -211,6 +207,17 @@ body {
   margin-bottom: 0;
 }
 
+#take-route-button {
+    display: flex;
+    margin-bottom: 25px;
+}
+
+#map-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .overview-meta {
   display: flex;
   flex-wrap: wrap;
@@ -227,14 +234,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
+  width: 46px;
+  height: 46px;
   box-sizing: border-box;
   border: 3px solid #fff;
   border-radius: 50%;
   background: rgba(253, 102, 102, 0.9);
   color: #282624;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
   box-shadow: 0 2px 8px #0003;
 }
@@ -307,6 +314,20 @@ body {
 
 .sheet-artist {
   font-weight: 600;
+}
+
+.sheet-image {
+    display: block;
+    width: 100%;
+    height: 240px;
+    margin-top: 40px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 12px;
+}
+
+.sheet-image[hidden] {
+    display: none;
 }
 
 .sheet-backdrop {
@@ -420,4 +441,111 @@ body {
 
 #pointer {
     max-width: 50%;
+}
+
+
+/* QR-sidan */
+
+.qr-page {
+    max-width: 1400px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 25px;
+}
+
+.qr-header {
+    margin-bottom: 60px;
+}
+
+.qr-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 80px;
+    max-width: 1400px;
+    margin: 40px auto;
+}
+
+.qr-information h1 {
+    max-width: 650px;
+    margin: 16px 0 24px;
+    font-size: 3rem;
+    line-height: 1.15;
+}
+
+.qr-intro {
+    font-size: 21px;
+    line-height: 1.7;
+}
+
+.qr-route-info {
+    margin-top: 40px;
+    padding: 24px;
+    border-left: 5px solid #fd6666;
+    background: #fff;
+    border-radius: 8px;
+}
+
+.qr-route-info > p {
+    margin-top: 0;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.qr-route-info h2 {
+    margin: 12px 0;
+    font-size: 26px;
+}
+
+.qr-route-info span {
+    color: #59564f;
+}
+
+.qr-information .route-button {
+    display: inline-flex;
+    width: auto;
+    margin-top: 100px;
+}
+
+.qr-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 36px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 8px 8px 4px rgba(0, 0, 0, 0.12);
+    text-align: center;
+}
+
+#qr-code {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 250px;
+    min-height: 250px;
+    padding: 10px;
+    background: #fff;
+}
+
+#qr-code img,
+#qr-code canvas {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.qr-card h2 {
+    margin: 24px 0 8px;
+    font-size: 24px;
+}
+
+.qr-card > p {
+    max-width: 350px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.qr-status {
+    color: #59564f;
 }

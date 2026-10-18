@@ -1,0 +1,79 @@
+
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Konstvandring i mobilen</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <link rel="stylesheet" href="css/mobil.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script type="module" src="js/mobil.js"></script>
+  </head>
+
+  <body>
+    <main class="mobile-app">
+
+      <header class="mobile-header">
+        <div>
+          <p class="mobile-eyebrow">KONSTVANDRING I VÄXJÖ</p>
+          <h1 id="route-title">Konstvandring</h1>
+          <p id="route-description">
+            Upptäck offentlig konst längs vägen.
+          </p>
+        </div>
+
+        <a href="valj-rutt.html" class="mobile-back">
+          Byt rutt
+        </a>
+      </header>
+
+      <section class="mobile-route-status" aria-live="polite">
+        <span id="stop-counter">Laddar rutt...</span>
+        <span>Tryck på en markör för att läsa mer.</span>
+      </section>
+
+      <div
+        id="mobile-map"
+        role="application"
+        aria-label="Karta över konstverken på rutten"
+      ></div>
+
+      <section class="mobile-artwork-card" aria-live="polite">
+
+        <div class="mobile-artwork-topline">
+          <p>AKTUELLT KONSTVERK</p>
+          <span id="artwork-position"></span>
+        </div>
+
+        <h2 id="artwork-title">Välj ett konstverk</h2>
+
+        <p id="artwork-meta"></p>
+
+        <p id="artwork-description">
+          Tryck på en markör på kartan för att visa information
+          om konstverket.
+        </p>
+
+        <div class="mobile-artwork-controls">
+          <button id="previous-artwork" type="button">
+            ← Föregående
+          </button>
+
+          <button id="next-artwork" type="button">
+            Nästa konstverk →
+          </button>
+        </div>
+
+      </section>
+
+      <footer class="mobile-footer">
+        <p>Använd kartan för att upptäcka konsten längs rutten.</p>
+      </footer>
+
+    </main>
+  </body>
+</html>

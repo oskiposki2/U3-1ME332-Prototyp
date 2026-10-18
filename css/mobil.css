@@ -1,0 +1,241 @@
+
+/* =========================
+   Grundinställningar
+========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f2efe7;
+  color: #282624;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+.mobile-app {
+  width: 100%;
+  max-width: 760px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* =========================
+   Sidhuvud
+========================= */
+
+.mobile-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.mobile-eyebrow {
+  margin: 0 0 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.mobile-header h1 {
+  margin: 0;
+  font-size: clamp(1.7rem, 6vw, 2.3rem);
+  line-height: 1.15;
+}
+
+#route-description {
+  margin: 10px 0 0;
+  color: #625e58;
+  font-size: 0.95rem;
+}
+
+.mobile-back {
+  flex-shrink: 0;
+  display: inline-block;
+  padding: 9px 12px;
+  border: 1px solid #282624;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.mobile-back:hover {
+  background: #282624;
+  color: #fff;
+}
+
+/* =========================
+   Ruttinformation
+========================= */
+
+.mobile-route-status {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  color: #625e58;
+}
+
+#stop-counter {
+  color: #282624;
+  font-weight: 700;
+}
+
+/* =========================
+   Karta
+========================= */
+
+#mobile-map {
+  width: 100%;
+  height: 42vh;
+  min-height: 300px;
+  max-height: 480px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #e2ded4;
+  z-index: 0;
+}
+
+/* =========================
+   Informationspanel
+========================= */
+
+.mobile-artwork-card {
+  margin-top: 16px;
+  padding: 22px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgb(40 38 36 / 7%);
+}
+
+.mobile-artwork-topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.mobile-artwork-topline p {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+#artwork-position {
+  font-size: 0.8rem;
+  color: #625e58;
+}
+
+.mobile-artwork-card h2 {
+  margin: 14px 0 4px;
+  font-size: 1.4rem;
+  line-height: 1.25;
+}
+
+#artwork-meta {
+  margin: 0;
+  color: #625e58;
+  font-size: 0.9rem;
+}
+
+#artwork-description {
+  margin: 16px 0 22px;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+/* =========================
+   Navigeringsknappar
+========================= */
+
+.mobile-artwork-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.mobile-artwork-controls button {
+  flex: 1;
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1px solid #282624;
+  border-radius: 10px;
+  background: #f2efe7;
+  color: #282624;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.mobile-artwork-controls button:last-child {
+  background: #fd6666;
+  border-color: #fd6666;
+}
+
+.mobile-artwork-controls button:hover {
+  filter: brightness(0.96);
+}
+
+.mobile-artwork-controls button:focus-visible,
+.mobile-back:focus-visible {
+  outline: 3px solid #6682fd;
+  outline-offset: 3px;
+}
+
+/* =========================
+   Sidfot
+========================= */
+
+.mobile-footer {
+  padding: 12px 0 4px;
+  color: #625e58;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+/* =========================
+   Små mobilskärmar
+========================= */
+
+@media (max-width: 420px) {
+  .mobile-app {
+    padding: 14px;
+  }
+
+  .mobile-header {
+    gap: 8px;
+  }
+
+  .mobile-back {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+
+  #mobile-map {
+    height: 38vh;
+    min-height: 270px;
+  }
+
+  .mobile-artwork-card {
+    padding: 18px;
+  }
+
+  .mobile-artwork-controls {
+    flex-direction: column;
+  }
+}

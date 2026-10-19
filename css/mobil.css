@@ -1,17 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap");
 
-/* =========================
-   Grundinställningar
-========================= */
+/* Grundinställningar */
 
 * {
   box-sizing: border-box;
 }
 
+html,
 body {
+  width: 100%;
+  height: 100%;
   margin: 0;
+}
+
+body {
   background: #f2efe7;
   color: #282624;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Manrope", sans-serif;
   line-height: 1.5;
 }
 
@@ -24,24 +29,29 @@ a {
   color: inherit;
 }
 
-.mobile-app {
-  width: 100%;
-  max-width: 760px;
-  min-height: 100vh;
-  margin: 0 auto;
-  padding: 20px;
+button {
+  color: inherit;
+  cursor: pointer;
 }
 
-/* =========================
-   Sidhuvud
-========================= */
+.mobile-app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 760px;
+  height: 100vh;
+  height: 100dvh;
+  margin: 0 auto;
+  padding: 14px;
+  overflow: hidden;
+}
+
+/* Sidhuvud */
 
 .mobile-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 20px;
+  flex-shrink: 0;
+  margin-bottom: 14px;
 }
 
 .mobile-eyebrow {
@@ -57,71 +67,126 @@ a {
   line-height: 1.15;
 }
 
-#route-description {
-  margin: 10px 0 0;
-  color: #625e58;
-  font-size: 0.95rem;
-}
-
-.mobile-back {
-  flex-shrink: 0;
-  display: inline-block;
-  padding: 9px 12px;
-  border: 1px solid #282624;
-  border-radius: 999px;
-  text-decoration: none;
-  font-size: 0.85rem;
-  font-weight: 700;
-}
-
-.mobile-back:hover {
-  background: #282624;
-  color: #fff;
-}
-
-/* =========================
-   Ruttinformation
-========================= */
-
-.mobile-route-status {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  margin-bottom: 12px;
-  font-size: 0.85rem;
-  color: #625e58;
-}
-
-#stop-counter {
-  color: #282624;
-  font-weight: 700;
-}
-
-/* =========================
-   Karta
-========================= */
+/* Karta */
 
 #mobile-map {
+  position: relative;
+  flex: 1;
   width: 100%;
-  height: 42vh;
-  min-height: 300px;
-  max-height: 480px;
+  max-height: 550px;
   border-radius: 16px;
   overflow: hidden;
   background: #e2ded4;
   z-index: 0;
 }
 
-/* =========================
-   Informationspanel
-========================= */
+/* Numrerade markörer */
+
+.mobile-div-icon {
+  background: transparent;
+  border: none;
+}
+
+.mobile-map-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #282624;
+  color: #fff;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 25%);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.mobile-map-marker.is-active {
+  background: #fd6666;
+  color: #282624;
+  transform: scale(1.1);
+}
+
+.route-meta {
+  margin: 8px 0 0;
+  color: #625e58;
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+/* Bakgrund bakom popupen */
+
+.sheet-backdrop {
+  position: fixed;
+  z-index: 800;
+  inset: 0;
+  border: 0;
+  background: rgb(40 38 36 / 35%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms ease;
+}
+
+.sheet-backdrop.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Popupen längst ned */
 
 .mobile-artwork-card {
-  margin-top: 16px;
-  padding: 22px;
+  position: fixed;
+  z-index: 900;
+  bottom: 0;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 760px);
+  height: min(70vh, 560px);
+  height: min(70dvh, 560px);
+  margin: 0;
+  padding: 8px 22px 20px;
+  overflow: hidden;
+  border-radius: 16px 16px 0 0;
   background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgb(40 38 36 / 7%);
+  box-shadow: 0 -4px 20px rgb(40 38 36 / 14%);
+  transform: translate(-50%, calc(100% - 160px));
+  transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.mobile-artwork-card.is-expanded {
+  overflow-y: auto;
+  transform: translate(-50%, 0);
+}
+
+/* Handtag för att öppna och stänga */
+
+.sheet-handle {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.sheet-handle span {
+  width: 42px;
+  height: 4px;
+  border-radius: 10px;
+  background: #c9c4bc;
+}
+
+/* Förhandsvisning i stängt läge */
+
+.sheet-preview {
+  flex-shrink: 0;
+  padding: 2px 0 8px;
 }
 
 .mobile-artwork-topline {
@@ -138,12 +203,73 @@ a {
   letter-spacing: 0.1em;
 }
 
+#preview-position,
 #artwork-position {
-  font-size: 0.8rem;
   color: #625e58;
+  font-size: 0.8rem;
 }
 
-.mobile-artwork-card h2 {
+.sheet-open {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  margin-top: 6px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  flex-direction: column;
+}
+
+#preview-title {
+  overflow: hidden;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.preview-cta {
+  flex-shrink: 0;
+  display: flex;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #fd6666;
+  font-size: 18px;
+  color: white;
+  font-weight: 600;
+  justify-content: center;
+}
+
+/* Detaljer visas först när popupen är öppen */
+
+.sheet-details {
+  display: none;
+  flex-direction: column;
+  flex: 1;
+  padding-bottom: 4px;
+}
+
+.mobile-artwork-card.is-expanded .sheet-preview {
+  display: none;
+}
+
+.mobile-artwork-card.is-expanded .sheet-details {
+  display: flex;
+}
+
+.sheet-close {
+  align-items: center;
+  margin: -20px 0 12px;
+  padding: 5px 10px;
+  border: none;
+  background: transparent;
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.sheet-details h2 {
   margin: 14px 0 4px;
   font-size: 1.4rem;
   line-height: 1.25;
@@ -161,13 +287,13 @@ a {
   line-height: 1.65;
 }
 
-/* =========================
-   Navigeringsknappar
-========================= */
+/* Föregående och nästa */
 
 .mobile-artwork-controls {
   display: flex;
   gap: 10px;
+  margin-top: auto;
+  padding-top: 16px;
 }
 
 .mobile-artwork-controls button {
@@ -179,7 +305,6 @@ a {
   background: #f2efe7;
   color: #282624;
   font-weight: 700;
-  cursor: pointer;
 }
 
 .mobile-artwork-controls button:last-child {
@@ -187,30 +312,16 @@ a {
   border-color: #fd6666;
 }
 
-.mobile-artwork-controls button:hover {
+.mobile-artwork-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.mobile-artwork-controls button:hover:not(:disabled) {
   filter: brightness(0.96);
 }
 
-.mobile-artwork-controls button:focus-visible,
-.mobile-back:focus-visible {
-  outline: 3px solid #6682fd;
-  outline-offset: 3px;
-}
-
-/* =========================
-   Sidfot
-========================= */
-
-.mobile-footer {
-  padding: 12px 0 4px;
-  color: #625e58;
-  font-size: 0.8rem;
-  text-align: center;
-}
-
-/* =========================
-   Små mobilskärmar
-========================= */
+/* Mindre mobilskärmar */
 
 @media (max-width: 420px) {
   .mobile-app {
@@ -218,24 +329,28 @@ a {
   }
 
   .mobile-header {
-    gap: 8px;
-  }
-
-  .mobile-back {
-    padding: 8px 10px;
-    font-size: 0.8rem;
-  }
-
-  #mobile-map {
-    height: 38vh;
-    min-height: 270px;
+    margin-bottom: 12px;
   }
 
   .mobile-artwork-card {
-    padding: 18px;
+    padding-right: 18px;
+    padding-left: 18px;
   }
 
   .mobile-artwork-controls {
     flex-direction: column;
+  }
+
+  .mobile-artwork-card.is-expanded .mobile-artwork-controls {
+    flex-direction: row;
+  }
+}
+
+/* Respektera inställningar för minskad rörelse */
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-artwork-card,
+  .sheet-backdrop {
+    transition: none;
   }
 }

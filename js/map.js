@@ -121,7 +121,7 @@ const waypoints = [
 
   try {
     const response = await fetch(
-      "https://api.heigit.org/openrouteservice/v2/directions/foot-walking/geojson",
+      "https://api.heigit.org/openrouteservice/v2/directions/foot-hiking/geojson",
       {
         method: "POST",
         headers: {

@@ -5,32 +5,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Konstvandring i mobilen</title>
+
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     />
     <link rel="stylesheet" href="css/mobil.css" />
+
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script type="module" src="js/mobil.js"></script>
   </head>
 
   <body>
     <main class="mobile-app">
-
       <header class="mobile-header">
         <div>
           <p class="mobile-eyebrow">KONSTVANDRING I VÄXJÖ</p>
           <h1 id="route-title">Konstvandring</h1>
-          <p id="route-description">
-            Upptäck offentlig konst längs vägen.
-          </p>
+          <p id="route-meta" class="route-meta"></p>
         </div>
       </header>
-
-      <section class="mobile-route-status" aria-live="polite">
-        <span id="stop-counter">Laddar rutt...</span>
-        <span>Tryck på en markör för att läsa mer.</span>
-      </section>
 
       <div
         id="mobile-map"
@@ -38,38 +32,76 @@
         aria-label="Karta över konstverken på rutten"
       ></div>
 
-      <section class="mobile-artwork-card" aria-live="polite">
+      <!-- Mörk bakgrund när popupen öppnas -->
+      <button
+        id="sheet-backdrop"
+        class="sheet-backdrop"
+        type="button"
+        aria-label="Stäng konstverksinformationen"
+        aria-hidden="true"
+        tabindex="-1"
+      ></button>
 
-        <div class="mobile-artwork-topline">
-          <p>AKTUELLT KONSTVERK</p>
+      <!-- Samma informationskort, nu som popup -->
+      <section
+        id="artwork-sheet"
+        class="mobile-artwork-card"
+        aria-live="polite"
+        aria-expanded="false"
+      >
+        <button
+          id="sheet-handle"
+          class="sheet-handle"
+          type="button"
+          aria-label="Visa konstverksinformation"
+          aria-expanded="false"
+        >
+          <span></span>
+        </button>
+
+        <!-- Den lilla panelen som syns längst ned -->
+        <div class="sheet-preview">
+          <div class="mobile-artwork-topline">
+            <p>AKTUELLT KONSTVERK</p>
+            <span id="preview-position"></span>
+          </div>
+
+          <button id="sheet-open" class="sheet-open" type="button">
+            <span id="preview-title">Välj ett konstverk</span>
+            <span class="preview-cta">Visa information ↑</span>
+          </button>
+        </div>
+
+        <!-- Befintlig information, synlig när popupen öppnas -->
+        <div class="sheet-details">
+          <div class="mobile-artwork-topline">
+            <p>AKTUELLT KONSTVERK</p>
+
+            <button id="sheet-close" class="sheet-close" type="button">
+            ×
+          </button>
+          </div>
+
+          <h2 id="artwork-title">Välj ett konstverk</h2>
+
+          <p id="artwork-meta"></p>
+
+          <p id="artwork-description">
+          </p>
+
           <span id="artwork-position"></span>
+
+          <div class="mobile-artwork-controls">
+            <button id="previous-artwork" type="button">
+              ← Föregående
+            </button>
+
+            <button id="next-artwork" type="button">
+              Nästa konstverk →
+            </button>
+          </div>
         </div>
-
-        <h2 id="artwork-title">Välj ett konstverk</h2>
-
-        <p id="artwork-meta"></p>
-
-        <p id="artwork-description">
-          Tryck på en markör på kartan för att visa information
-          om konstverket.
-        </p>
-
-        <div class="mobile-artwork-controls">
-          <button id="previous-artwork" type="button">
-            ← Föregående
-          </button>
-
-          <button id="next-artwork" type="button">
-            Nästa konstverk →
-          </button>
-        </div>
-
       </section>
-
-      <footer class="mobile-footer">
-        <p>Använd kartan för att upptäcka konsten längs rutten.</p>
-      </footer>
-
     </main>
   </body>
 </html>

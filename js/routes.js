@@ -51,7 +51,6 @@ export const routes = {
     title: "Trummens pärlor",
     description: "Skulpturer och konstverk i den östra delen av området.",
     artworkIds: [
-      "art-022",
       "art-021",
       "art-002",
       "art-003",

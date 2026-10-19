@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="sv">
   <head>
@@ -26,11 +25,25 @@
         </div>
       </header>
 
-      <div
-        id="mobile-map"
-        role="application"
-        aria-label="Karta över konstverken på rutten"
-      ></div>
+      <div class="map-area">
+        <div
+          id="mobile-map"
+          role="application"
+          aria-label="Karta över konstverken på rutten"
+        ></div>
+
+        <button
+          id="locate-me"
+          class="location-button"
+          type="button"
+          aria-pressed="false"
+        >
+          <span aria-hidden="true">◎</span>
+          <span id="locate-button-text">Följ min position</span>
+        </button>
+
+        <p id="location-status" class="location-status" aria-live="polite"></p>
+      </div>
 
       <!-- Mörk bakgrund när popupen öppnas -->
       <button
@@ -78,27 +91,22 @@
             <p>AKTUELLT KONSTVERK</p>
 
             <button id="sheet-close" class="sheet-close" type="button">
-            ×
-          </button>
+              ×
+            </button>
           </div>
 
           <h2 id="artwork-title">Välj ett konstverk</h2>
 
           <p id="artwork-meta"></p>
 
-          <p id="artwork-description">
-          </p>
+          <p id="artwork-description"></p>
 
           <span id="artwork-position"></span>
 
           <div class="mobile-artwork-controls">
-            <button id="previous-artwork" type="button">
-              ← Föregående
-            </button>
+            <button id="previous-artwork" type="button">← Föregående</button>
 
-            <button id="next-artwork" type="button">
-              Nästa konstverk →
-            </button>
+            <button id="next-artwork" type="button">Nästa konstverk →</button>
           </div>
         </div>
       </section>

@@ -22,6 +22,9 @@ const previewTitle = document.querySelector("#preview-title");
 const artworkTitle = document.querySelector("#artwork-title");
 const artworkMeta = document.querySelector("#artwork-meta");
 const artworkDescription = document.querySelector("#artwork-description");
+const locateButton = document.querySelector("#locate-me");
+const locateButtonText = document.querySelector("#locate-button-text");
+const locationStatus = document.querySelector("#location-status");
 
 const sheet = document.querySelector("#artwork-sheet");
 const backdrop = document.querySelector("#sheet-backdrop");
@@ -289,3 +292,115 @@ if (routeArtworks.length > 0) {
 
 // Starta ruttberäkningen
 drawWalkingRoute();
+
+// GPS: följ användarens aktuella position
+
+let watchId = null;
+let userMarker = null;
+let accuracyCircle = null;
+
+function stopLocationTracking() {
+  if (watchId !== null) {
+    navigator.geolocation.clearWatch(watchId);
+    watchId = null;
+  }
+
+  locateButtonText.textContent = "Följ min position";
+  locateButton.setAttribute("aria-pressed", "false");
+}
+
+locateButton.addEventListener("click", () => {
+  // Stäng av liveuppdateringen om den redan är aktiv.
+  if (watchId !== null) {
+    stopLocationTracking();
+    locationStatus.textContent = "GPS-uppdateringen är pausad.";
+    return;
+  }
+
+  // GPS kräver normalt HTTPS på en telefon.
+  if (!window.isSecureContext) {
+    locationStatus.textContent =
+      "GPS kräver en säker HTTPS-adress på mobilen.";
+    return;
+  }
+
+  if (!navigator.geolocation) {
+    locationStatus.textContent =
+      "Din webbläsare stöder inte GPS-positionering.";
+    return;
+  }
+
+  locateButtonText.textContent = "Sluta följa position";
+  locateButton.setAttribute("aria-pressed", "true");
+  locationStatus.textContent =
+    "Hämtar position. Tillåt platsåtkomst om du får frågan.";
+
+  watchId = navigator.geolocation.watchPosition(
+    (position) => {
+      const { latitude, longitude, accuracy } = position.coords;
+      const positionOnMap = [latitude, longitude];
+      const firstPosition = !userMarker;
+
+      // Skapa eller flytta den blå positionsmarkören.
+      if (!userMarker) {
+        const icon = L.divIcon({
+          className: "mobile-user-icon",
+          html: '<span class="mobile-user-dot"></span>',
+          iconSize: [20, 20],
+          iconAnchor: [10, 10],
+        });
+
+        userMarker = L.marker(positionOnMap, {
+          icon,
+          zIndexOffset: 1000,
+        }).addTo(map);
+      } else {
+        userMarker.setLatLng(positionOnMap);
+      }
+
+      // Visa ungefärlig GPS-noggrannhet.
+      if (!accuracyCircle) {
+        accuracyCircle = L.circle(positionOnMap, {
+          radius: accuracy,
+          color: "#405fff",
+          weight: 1,
+          fillColor: "#405fff",
+          fillOpacity: 0.12,
+        }).addTo(map);
+      } else {
+        accuracyCircle.setLatLng(positionOnMap);
+        accuracyCircle.setRadius(accuracy);
+      }
+
+      // Centrera kartan första gången, följ sedan positionen.
+      if (firstPosition) {
+        map.setView(positionOnMap, 16);
+      } else {
+        map.panTo(positionOnMap, { animate: true });
+      }
+
+      locationStatus.textContent =
+        `Din position är uppdaterad. Noggrannhet cirka ${Math.round(accuracy)} meter.`;
+    },
+
+    (error) => {
+      if (error.code === 1) {
+        locationStatus.textContent =
+          "Platsåtkomst nekades. Tillåt platsåtkomst i webbläsarens inställningar.";
+        stopLocationTracking();
+      } else if (error.code === 2) {
+        locationStatus.textContent =
+          "Positionen kunde inte hittas. Kontrollera telefonens platsinställningar.";
+      } else {
+        locationStatus.textContent =
+          "Det tog för lång tid att hämta positionen. Försök igen.";
+      }
+    },
+
+    {
+      enableHighAccuracy: true,
+      maximumAge: 3000,
+      timeout: 20000,
+    }
+  );
+});

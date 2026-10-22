@@ -1,7 +1,7 @@
 export const routes = {
   statyrundan: {
     title: "Statyrundan",
-    description: "Historiska personer och berättelser mitt i Växjö.",
+    description: "Historiska personer och berättelser mitt i Växjö med fokus på statyer.",
     artworkIds: [
       "art-025",
       "art-090",
@@ -16,7 +16,7 @@ export const routes = {
 
   "konst-mellan-kvarteren": {
     title: "Konst mellan kvarteren",
-    description: "Upptäck skulpturer, former och oväntad konst mitt i Växjö.",
+    description: "Upptäck skulpturer, former och oväntad konst mitt i Växjö. En passande rutt om man vill stanna i centrum.",
     artworkIds: [
       "art-088", // Stämpelverket
       "art-089", // Rörorkestern
@@ -33,7 +33,7 @@ export const routes = {
 
   "sjobris-skulpturer": {
     title: "Sjöbris & Skulpturer",
-    description: "En upptäcktsfärd bland konstverk söder om stadskärnan.",
+    description: "En upptäcktsfärd bland konstverk runt Växjsjön. Här finns populära konstverk som ingår i skulpturstråket Växjö Art Site.",
     artworkIds: [
       "art-001",
       "art-008",
@@ -48,8 +48,8 @@ export const routes = {
   },
 
   "trummens-pärlor": {
-    title: "Trummens pärlor",
-    description: "Skulpturer och konstverk i den östra delen av området.",
+    title: "Från City till Campus",
+    description: "Skulpturer och konstverk i en rutt som sträcker sig från innerstaden ner till Campus på Linnéuniversitet.",
     artworkIds: [
       "art-021",
       "art-002",

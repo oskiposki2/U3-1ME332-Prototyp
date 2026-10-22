@@ -44,13 +44,17 @@
         <section>
             <div id="map"></div>
             <div id="map-info">
-                <div>
-                    <h1 id="route-title">Laddar rutt...</h1>
+                <div class="route-info">
+                    <div class="route-info-top">
+                        <h1 id="route-title">Laddar rutt...</h1>
+                        <div class="overview-meta" id="route-meta"></div>
+                    </div>
+
                     <p id="route-description"></p>
-                    <div class="overview-meta" id="route-meta"></div>
                 </div>
+
                 <a href="#" id="take-route-button" class="route-button">
-                    Ta med dig rutten →
+                    Ta med dig rutten <span class="arrow">→</span>
                 </a>
             </div>
         </section>
@@ -65,14 +69,37 @@
             </button>
 
             <div class="sheet-content">
-                <img id="sheet-image" class="sheet-image" src="img/C88D84ED-6088-42C2-9A28-F6C322B24DAD_1_105_c.jpeg" alt=""/>
+                <div class="sheet-text">
+                    <h2 id="sheet-title"></h2>
 
-                <h2 id="sheet-title"></h2>
+                    <section class="sheet-facts" aria-label="Fakta om konstverket">
+                        <p class="sheet-artist" id="sheet-artist"></p>
+                        <p class="sheet-year" id="sheet-year"></p>
+                    </section>
 
-                <p class="sheet-artist" id="sheet-artist"></p>
-                <p class="sheet-year" id="sheet-year"></p>
-                <p class="sheet-description" id="sheet-description"></p>
+
+                    <section class="sheet-description-section">
+                        <h3>Om verket</h3>
+                        <p class="sheet-description" id="sheet-description"></p>
+                    </section>
+                </div>
+                <img id="sheet-image" class="sheet-image" src="img/0D527809-67AC-4C51-B405-540086A377F8_1_105_c.jpeg" alt="" />
             </div>
+
+            <div class="sheet-navigation">
+                <button id="previous-artwork" aria-label="Föregående konstverk">
+                    ←
+                </button>
+
+                <span class="sheet-navigation-count" id="artwork-count">
+                    1 av 5 konstverk
+                </span>
+
+                <button id="next-artwork" aria-label="Nästa konstverk">
+                    →
+                </button>
+            </div>
+
         </div>
     </main>
 </body>

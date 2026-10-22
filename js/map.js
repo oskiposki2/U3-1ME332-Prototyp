@@ -2,8 +2,6 @@ import { artworks } from "./artworks.js";
 import { routes } from "./routes.js";
 import { ORS_API_KEY } from "./api.js";
 
-
-
 const sheet = document.querySelector("#artwork-sheet");
 const closeButton = document.querySelector("#sheet-close");
 const backdrop = document.querySelector("#sheet-backdrop");
@@ -14,10 +12,21 @@ const sheetArtist = document.querySelector("#sheet-artist");
 const sheetYear = document.querySelector("#sheet-year");
 const sheetDescription = document.querySelector("#sheet-description");
 
+const previousButton = document.querySelector("#previous-artwork");
+const nextButton = document.querySelector("#next-artwork");
+const artworkCount = document.querySelector("#artwork-count");
+
+let currentArtworkIndex = -1;
+
 function showArtwork(artwork) {
+
+  currentArtworkIndex = selectedArtworks.indexOf(artwork);
+  artworkCount.textContent =
+    `${currentArtworkIndex + 1} av ${selectedArtworks.length} konstverk`;
+
   sheetTitle.textContent = artwork.title || artwork.name || "Namnlöst konstverk";
-  sheetArtist.textContent = "Konstnär: " + artwork.artist;
-  sheetYear.textContent = "År: " + artwork.year;
+  sheetArtist.textContent = artwork.artist;
+  sheetYear.textContent = artwork.year;
   sheetDescription.textContent = artwork.description;
 
   sheet.classList.add("is-open");
@@ -65,6 +74,25 @@ const selectedArtworks = route.artworkIds
   .map(id => artworkById.get(id))
   .filter(Boolean);
 
+
+function navigateArtwork(direction) {
+  if (selectedArtworks.length === 0) return;
+
+  currentArtworkIndex =
+    (currentArtworkIndex + direction + selectedArtworks.length)
+    % selectedArtworks.length;
+
+  showArtwork(selectedArtworks[currentArtworkIndex]);
+}
+
+previousButton.addEventListener("click", () => {
+  navigateArtwork(-1);
+});
+
+nextButton.addEventListener("click", () => {
+  navigateArtwork(1);
+});
+
 // Visa antal konstverk
 const metaElement = document.querySelector("#route-meta");
 const count = document.createElement("span");
@@ -80,10 +108,21 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "&copy; OpenStreetMap contributors"
 }).addTo(map);
 
+// Style av "du är här"-markör
+function createScreenIcon() {
+  return L.divIcon({
+    className: "screen-marker",
+html: `<div class="screen-marker__label">Du är här</div>`,
+iconSize: [90, 38],
+iconAnchor: [45, 42],
+  });
+}
+
 // Markera den publika skärmen
-L.marker(screenPosition)
-  .addTo(map)
-  .bindPopup("Publik skärm – start och mål");
+L.marker(screenPosition, {
+  icon: createScreenIcon(),
+  interactive: false,
+}).addTo(map);
 
 // Lägg till numrerade markörer för konstverken
 selectedArtworks.forEach((artwork, index) => {

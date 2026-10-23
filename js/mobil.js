@@ -341,6 +341,7 @@ function createMarkerIcon(number, isActive) {
 // Panelens tre lägen
 let currentSheetState = "compact";
 
+
 function keepMarkerVisible(artwork) {
   if (currentSheetState === "expanded") return;
 
@@ -348,27 +349,35 @@ function keepMarkerVisible(artwork) {
   const mapRect = mapElement.getBoundingClientRect();
   const sheetTop = sheet.getBoundingClientRect().top;
 
-  // Den del av kartan som fortfarande syns ovanför panelen
+  // Beräkna den synliga kartytan ovanför popupen
   const visibleBottom = Math.min(mapRect.bottom, sheetTop);
   const visibleHeight = visibleBottom - mapRect.top;
 
   if (visibleHeight < 100) return;
 
-  // Placera markören ungefär mitt i den synliga kartytan
-  const targetY = visibleHeight * 0.58;
-  const markerPoint = map.latLngToContainerPoint(artwork.coordinates);
+  // Målet är mitten av den synliga kartytan
+  const targetX = mapElement.clientWidth / 2;
+  const targetY = visibleHeight / 2;
 
+  // Markörens nuvarande position på kartan
+  const markerPoint = map.latLngToContainerPoint(
+    artwork.coordinates,
+  );
+
+  // Beräkna hur mycket kartan behöver flyttas i båda riktningarna
+  const shiftX = markerPoint.x - targetX;
   const shiftY = markerPoint.y - targetY;
 
-  // Flytta kartans centrum så markören hamnar högre upp
+  // Flytta kartan så att den valda markören hamnar i mitten
   const centerPoint = map
     .project(map.getCenter(), map.getZoom())
-    .add([0, shiftY]);
+    .add([shiftX, shiftY]);
 
   map.panTo(map.unproject(centerPoint), {
     animate: true,
   });
 }
+
 
 function setSheetState(state) {
   if (!["compact", "medium", "expanded"].includes(state)) {

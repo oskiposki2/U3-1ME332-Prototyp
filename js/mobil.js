@@ -2,20 +2,6 @@ import { artworks } from "./artworks.js";
 import { routes } from "./routes.js";
 import { ORS_API_KEY } from "./api.js";
 
-// Tillfälligt test: kontrollera att JavaScript laddas
-const gpsDebugStatus = document.querySelector("#location-status");
-const gpsDebugButton = document.querySelector("#locate-me");
-
-if (gpsDebugStatus) {
-  gpsDebugStatus.textContent = "Test: JavaScript har laddats.";
-}
-
-gpsDebugButton?.addEventListener("click", () => {
-  if (gpsDebugStatus) {
-    gpsDebugStatus.textContent = "Test: knapptryck registrerat.";
-  }
-});
-
 // Hämta vald rutt från URL:en
 const params = new URLSearchParams(window.location.search);
 const requestedRouteId = params.get("route");

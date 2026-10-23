@@ -462,6 +462,19 @@ button {
   font-size: 1.2rem;
 }
 
+
+/* GPS-knappen när positionsföljningen är aktiv */
+
+.location-button.is-active {
+  border-color: #405fff;
+  background: #eef1ff;
+}
+
+.location-button.is-active span:first-child {
+  color: #405fff;
+}
+
+
 /* Status för GPS */
 
 .location-status {

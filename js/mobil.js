@@ -87,6 +87,240 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
 }).addTo(map);
 
+
+/* GPS – följ besökarens position */
+
+// Hämta GPS-elementen från HTML
+const locateButton = document.querySelector("#locate-me");
+const locateButtonText = document.querySelector("#locate-button-text");
+const locationStatus = document.querySelector("#location-status");
+
+// GPS-tillstånd
+let locationWatchId = null;
+let isFollowingLocation = false;
+let userMarker = null;
+let accuracyCircle = null;
+let lastUserLatLng = null;
+let hasCenteredOnUser = false;
+
+// Uppdatera GPS-knappen
+function updateLocationButton() {
+  if (isFollowingLocation) {
+    locateButtonText.textContent = "Sluta följa min position";
+  } else if (locationWatchId !== null) {
+    locateButtonText.textContent = "Följ min position igen";
+  } else {
+    locateButtonText.textContent = "Följ min position";
+  }
+
+  locateButton.setAttribute(
+    "aria-pressed",
+    String(isFollowingLocation),
+  );
+
+  locateButton.classList.toggle(
+    "is-active",
+    isFollowingLocation,
+  );
+}
+
+// Skapa eller uppdatera den blå positionsmarkören
+function updateUserPosition(position) {
+  const latitude = position.coords.latitude;
+  const longitude = position.coords.longitude;
+  const accuracy = position.coords.accuracy;
+  const latLng = L.latLng(latitude, longitude);
+
+  lastUserLatLng = latLng;
+
+  // Visa en cirkel som anger GPS-positionens ungefärliga noggrannhet
+  if (!accuracyCircle) {
+    accuracyCircle = L.circle(latLng, {
+      radius: accuracy,
+      color: "#405fff",
+      weight: 1,
+      opacity: 0.5,
+      fillColor: "#405fff",
+      fillOpacity: 0.12,
+      interactive: false,
+    }).addTo(map);
+  } else {
+    accuracyCircle.setLatLng(latLng);
+    accuracyCircle.setRadius(accuracy);
+  }
+
+  // Skapa den blå punkten första gången
+  if (!userMarker) {
+    const userIcon = L.divIcon({
+      className: "mobile-user-icon",
+      html: '<span class="mobile-user-dot" aria-hidden="true"></span>',
+      iconSize: [20, 20],
+      iconAnchor: [10, 10],
+    });
+
+    userMarker = L.marker(latLng, {
+      icon: userIcon,
+      interactive: false,
+      keyboard: false,
+      zIndexOffset: 1000,
+    }).addTo(map);
+  } else {
+    userMarker.setLatLng(latLng);
+  }
+
+  // Följ användaren endast när följningen är aktiverad
+  if (isFollowingLocation) {
+    centerOnUser();
+  }
+
+  const roundedAccuracy = Math.round(accuracy);
+
+  locationStatus.textContent =
+    accuracy > 100
+      ? `Din position visas, men GPS-noggrannheten är låg (cirka ${roundedAccuracy} m).`
+      : `Din position visas på kartan (noggrannhet cirka ${roundedAccuracy} m).`;
+}
+
+// Centrera kartan på användaren
+function centerOnUser() {
+  if (!lastUserLatLng) return;
+
+  if (!hasCenteredOnUser) {
+    map.setView(
+      lastUserLatLng,
+      Math.max(map.getZoom(), 16),
+      { animate: true },
+    );
+
+    hasCenteredOnUser = true;
+  } else {
+    map.panTo(lastUserLatLng, { animate: true });
+  }
+}
+
+// Avsluta GPS-spårningen och rensa markörerna
+function stopLocationFollowing(message = "") {
+  if (
+    locationWatchId !== null &&
+    navigator.geolocation
+  ) {
+    navigator.geolocation.clearWatch(locationWatchId);
+  }
+
+  locationWatchId = null;
+  isFollowingLocation = false;
+  lastUserLatLng = null;
+  hasCenteredOnUser = false;
+
+  if (userMarker) {
+    map.removeLayer(userMarker);
+    userMarker = null;
+  }
+
+  if (accuracyCircle) {
+    map.removeLayer(accuracyCircle);
+    accuracyCircle = null;
+  }
+
+  updateLocationButton();
+  locationStatus.textContent = message;
+}
+
+// Hantera GPS-fel
+function handleLocationError(error) {
+  let message;
+
+  switch (error.code) {
+    case 1:
+      message =
+        "Platsåtkomst nekades. Tillåt platsåtkomst i webbläsarens inställningar.";
+      break;
+    case 2:
+      message =
+        "Din position kunde inte hittas. Kontrollera mobilens platsinställningar.";
+      break;
+    case 3:
+      message =
+        "Det tog för lång tid att hitta din position. Försök igen.";
+      break;
+    default:
+      message = "GPS fungerar inte just nu. Försök igen.";
+  }
+
+  stopLocationFollowing(message);
+}
+
+// Starta GPS
+function startLocationFollowing() {
+  if (!navigator.geolocation) {
+    locationStatus.textContent =
+      "Din webbläsare stöder inte GPS-positionering.";
+
+    return;
+  }
+
+  isFollowingLocation = true;
+  updateLocationButton();
+
+  locationStatus.textContent = "Hämtar din position…";
+
+  locationWatchId = navigator.geolocation.watchPosition(
+    updateUserPosition,
+    handleLocationError,
+    {
+      enableHighAccuracy: true,
+      maximumAge: 5000,
+      timeout: 20000,
+    },
+  );
+
+  // Uppdatera knappen när GPS-bevakningen har startat
+  updateLocationButton();
+}
+
+// Hantera tryck på GPS-knappen
+locateButton.addEventListener("click", () => {
+  // Om GPS inte är igång: starta positionsföljningen
+  if (locationWatchId === null) {
+    startLocationFollowing();
+    return;
+  }
+
+  // Om användaren följs: stäng av GPS-följningen
+  if (isFollowingLocation) {
+    stopLocationFollowing(
+      "Positionsföljningen är avstängd.",
+    );
+    return;
+  }
+
+  // Återuppta följningen efter att användaren flyttat kartan
+  isFollowingLocation = true;
+  updateLocationButton();
+
+  locationStatus.textContent = "Följer din position.";
+
+  centerOnUser();
+});
+
+// Pausa automatisk centrering när användaren drar i kartan.
+// GPS-markören fortsätter att uppdateras.
+map.on("dragstart", () => {
+  if (
+    !isFollowingLocation ||
+    locationWatchId === null
+  ) {
+    return;
+  }
+
+  isFollowingLocation = false;
+  updateLocationButton();
+
+  locationStatus.textContent =
+    "Kartföljningen är pausad. Tryck på knappen för att följa din position igen.";
+});
+
+
 // Markörer
 let currentIndex = 0;
 const markers = [];

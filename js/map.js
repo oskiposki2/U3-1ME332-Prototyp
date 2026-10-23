@@ -74,7 +74,6 @@ const selectedArtworks = route.artworkIds
   .map(id => artworkById.get(id))
   .filter(Boolean);
 
-
 function navigateArtwork(direction) {
   if (selectedArtworks.length === 0) return;
 
@@ -127,25 +126,19 @@ L.marker(screenPosition, {
 // Lägg till numrerade markörer för konstverken
 selectedArtworks.forEach((artwork, index) => {
   const icon = L.divIcon({
-    className: index === 0 ? "artwork-marker-icon marker-hint" : "artwork-marker-icon",
+    className:
+      index === 0
+        ? "artwork-marker-icon marker-hint"
+        : "artwork-marker-icon",
     html: `<span>${index + 1}</span>`,
     iconSize: [36, 36],
-    iconAnchor: [18, 18]
+    iconAnchor: [18, 18],
   });
 
-const marker = L.marker(artwork.coordinates, { icon }).addTo(map);
+  const marker = L.marker(artwork.coordinates, { icon }).addTo(map);
 
-marker.on("click", () => {
-  showArtwork(artwork);
+  marker.on("click", () => showArtwork(artwork));
 });
-});
-
-// Anpassa kartvyn så att skärmen och konstverken syns
-const positions = [
-  screenPosition,
-  ...selectedArtworks.map(artwork => artwork.coordinates)
-];
-
 
 async function drawWalkingRoute() {
   // Start vid skärmen, genom konstverken och tillbaka.
@@ -219,4 +212,3 @@ const waypoints = [
 }
 
 drawWalkingRoute();
-

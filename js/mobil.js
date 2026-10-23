@@ -22,9 +22,6 @@ const previewTitle = document.querySelector("#preview-title");
 const artworkTitle = document.querySelector("#artwork-title");
 const artworkMeta = document.querySelector("#artwork-meta");
 const artworkDescription = document.querySelector("#artwork-description");
-const locateButton = document.querySelector("#locate-me");
-const locateButtonText = document.querySelector("#locate-button-text");
-const locationStatus = document.querySelector("#location-status");
 
 const sheet = document.querySelector("#artwork-sheet");
 const backdrop = document.querySelector("#sheet-backdrop");
@@ -104,32 +101,102 @@ function createMarkerIcon(number, isActive) {
   });
 }
 
+// Panelens tre lägen
+let currentSheetState = "compact";
+
+function keepMarkerVisible(artwork) {
+  if (currentSheetState === "expanded") return;
+
+  const mapElement = map.getContainer();
+  const mapRect = mapElement.getBoundingClientRect();
+  const sheetTop = sheet.getBoundingClientRect().top;
+
+  // Den del av kartan som fortfarande syns ovanför panelen
+  const visibleBottom = Math.min(mapRect.bottom, sheetTop);
+  const visibleHeight = visibleBottom - mapRect.top;
+
+  if (visibleHeight < 100) return;
+
+  // Placera markören ungefär mitt i den synliga kartytan
+  const targetY = visibleHeight * 0.58;
+  const markerPoint = map.latLngToContainerPoint(artwork.coordinates);
+
+  const shiftY = markerPoint.y - targetY;
+
+  // Flytta kartans centrum så markören hamnar högre upp
+  const centerPoint = map
+    .project(map.getCenter(), map.getZoom())
+    .add([0, shiftY]);
+
+  map.panTo(map.unproject(centerPoint), {
+    animate: true,
+  });
+}
+
+function setSheetState(state) {
+  if (!["compact", "medium", "expanded"].includes(state)) {
+    return;
+  }
+
+  currentSheetState = state;
+
+  sheet.classList.remove(
+    "is-expanded",
+    "sheet-compact",
+    "sheet-medium",
+    "sheet-expanded",
+  );
+
+  sheet.classList.add(`sheet-${state}`);
+
+  sheet.classList.remove("sheet-drag-show-details");
+  sheet.style.height = "";
+
+  const isOpen = state !== "compact";
+  const showBackdrop = state === "expanded";
+
+  sheet.setAttribute("aria-expanded", String(isOpen));
+  handle.setAttribute("aria-expanded", String(isOpen));
+
+  if (state === "compact") {
+    handle.setAttribute("aria-label", "Visa konstverksinformation");
+  } else if (state === "medium") {
+    handle.setAttribute("aria-label", "Dra upp för mer information");
+  } else {
+    handle.setAttribute("aria-label", "Dra ned för mindre information");
+  }
+
+  backdrop.classList.toggle("is-visible", showBackdrop);
+  backdrop.setAttribute("aria-hidden", String(!showBackdrop));
+
+  // Vänta tills panelen har ändrat storlek innan kartan flyttas
+  if (state !== "expanded" && routeArtworks.length > 0) {
+    window.setTimeout(() => {
+      const artwork = routeArtworks[currentIndex];
+
+      if (artwork) {
+        keepMarkerVisible(artwork);
+      }
+    }, 430);
+  }
+}
+
 routeMeta.textContent = `${routeArtworks.length} konstverk`;
 
 // Popupfunktioner
 function openSheet() {
-  sheet.classList.add("is-expanded");
-  backdrop.classList.add("is-visible");
-
-  sheet.setAttribute("aria-expanded", "true");
-  handle.setAttribute("aria-expanded", "true");
-  handle.setAttribute("aria-label", "Stäng konstverksinformationen");
-  backdrop.setAttribute("aria-hidden", "false");
+  setSheetState("medium");
 }
 
 function closeSheet() {
-  sheet.classList.remove("is-expanded");
-  backdrop.classList.remove("is-visible");
-
-  sheet.setAttribute("aria-expanded", "false");
-  handle.setAttribute("aria-expanded", "false");
-  handle.setAttribute("aria-label", "Visa konstverksinformation");
-  backdrop.setAttribute("aria-hidden", "true");
+  setSheetState("compact");
 }
 
 // Visa valt konstverk
 function selectArtwork(index, moveMap = true, openPopup = true) {
   if (index < 0 || index >= routeArtworks.length) return;
+
+  const sheetWasCompact = currentSheetState === "compact";
 
   currentIndex = index;
 
@@ -155,16 +222,26 @@ function selectArtwork(index, moveMap = true, openPopup = true) {
     );
   });
 
-  // Flytta kartan när man går till föregående/nästa
-  if (moveMap) {
+  // Centrera bara kartan direkt om panelens placering inte styr vyn.
+  if (moveMap && !openPopup) {
     map.panTo(artwork.coordinates, { animate: true });
   }
 
   previousButton.disabled = currentIndex === 0;
   nextButton.disabled = currentIndex === routeArtworks.length - 1;
 
-  if (openPopup) {
-    openSheet();
+  // Öppna mellanläget om panelen är kompakt
+  if (openPopup && currentSheetState === "compact") {
+    setSheetState("medium");
+  }
+
+  // Placera markören i rätt läge med en enda kartförflyttning.
+  if (openPopup && !sheetWasCompact) {
+    if (currentSheetState === "expanded") {
+      map.panTo(artwork.coordinates, { animate: true });
+    } else {
+      keepMarkerVisible(artwork);
+    }
   }
 }
 
@@ -253,11 +330,170 @@ async function drawWalkingRoute() {
 // Öppna och stäng popupen
 document.querySelector("#sheet-open").addEventListener("click", openSheet);
 
+// Dra panelen med fingret
+let touchStartY = null;
+let startPanelHeight = 0;
+let startScrollTop = 0;
+let isDraggingPanel = false;
+let ignorePanelClickUntil = 0;
+
+const compactHeight = 160;
+
+function getPanelHeights() {
+  return [
+    compactHeight,
+    window.innerHeight * 0.55,
+    Math.min(window.innerHeight * 0.9, 760),
+  ];
+}
+
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(value, max));
+}
+
+function finishPanelDrag() {
+  if (!isDraggingPanel) {
+    touchStartY = null;
+    return;
+  }
+
+  const currentHeight = sheet.getBoundingClientRect().height;
+  const heights = getPanelHeights();
+  const states = ["compact", "medium", "expanded"];
+
+  // Välj det läge vars höjd ligger närmast den aktuella höjden
+  let nearestIndex = 0;
+  let smallestDifference = Infinity;
+
+  heights.forEach((height, index) => {
+    const difference = Math.abs(currentHeight - height);
+
+    if (difference < smallestDifference) {
+      smallestDifference = difference;
+      nearestIndex = index;
+    }
+  });
+
+  isDraggingPanel = false;
+  touchStartY = null;
+
+  sheet.classList.remove("is-dragging");
+
+  // Förhindra att dragningen råkar aktivera en knapp
+  ignorePanelClickUntil = Date.now() + 350;
+
+  setSheetState(states[nearestIndex]);
+}
+
+// Börja registrera dragningen
+sheet.addEventListener(
+  "touchstart",
+  (event) => {
+    if (event.touches.length !== 1) return;
+
+    // Navigerings- och stängningsknappar ska fungera normalt
+    if (
+      event.target.closest(
+        "#previous-artwork, #next-artwork, #sheet-close, #return-to-map",
+      )
+    ) {
+      return;
+    }
+
+    touchStartY = event.touches[0].clientY;
+    startPanelHeight = sheet.getBoundingClientRect().height;
+    startScrollTop = sheet.querySelector(".sheet-scroll-content").scrollTop;
+    isDraggingPanel = false;
+  },
+  { passive: true },
+);
+
+// Låt panelen följa fingret
+sheet.addEventListener(
+  "touchmove",
+  (event) => {
+    if (touchStartY === null || event.touches.length !== 1) {
+      return;
+    }
+
+    const currentY = event.touches[0].clientY;
+    const movement = touchStartY - currentY;
+
+    if (Math.abs(movement) < 6 && !isDraggingPanel) {
+      return;
+    }
+
+    // Avgör om gesten ska dra panelen eller scrolla texten
+    if (!isDraggingPanel) {
+      const atTopOfContent = startScrollTop <= 1;
+
+      if (currentSheetState === "compact" && movement > 0) {
+        isDraggingPanel = true;
+      } else if (currentSheetState === "medium" && atTopOfContent) {
+        isDraggingPanel = true;
+      } else if (
+        currentSheetState === "expanded" &&
+        movement < 0 &&
+        atTopOfContent
+      ) {
+        isDraggingPanel = true;
+      }
+
+      if (isDraggingPanel) {
+        sheet.classList.add("is-dragging");
+      }
+    }
+
+    // Om det är vanlig scrollning låter vi webbläsaren hantera den
+    if (!isDraggingPanel) return;
+
+    event.preventDefault();
+
+    const heights = getPanelHeights();
+    const maxHeight = heights[2];
+
+    // Fingret uppåt = större panel, nedåt = mindre panel
+    const newHeight = clamp(
+      startPanelHeight + movement,
+      compactHeight,
+      maxHeight,
+    );
+
+    sheet.style.height = `${newHeight}px`;
+
+    // Visa innehållet när panelen har dragits upp en bit
+    sheet.classList.toggle("sheet-drag-show-details", newHeight > 220);
+  },
+  { passive: false },
+);
+
+// Snäpp till närmaste läge när fingret släpps
+sheet.addEventListener("touchend", finishPanelDrag);
+
+sheet.addEventListener("touchcancel", finishPanelDrag);
+
+// Hindra oavsiktliga klick precis efter en dragning
+sheet.addEventListener(
+  "click",
+  (event) => {
+    if (Date.now() < ignorePanelClickUntil) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  },
+  true,
+);
+
+// Handtaget kan fortfarande tryckas på
 handle.addEventListener("click", () => {
-  if (sheet.classList.contains("is-expanded")) {
-    closeSheet();
+  if (Date.now() < ignorePanelClickUntil) return;
+
+  if (currentSheetState === "compact") {
+    setSheetState("medium");
+  } else if (currentSheetState === "medium") {
+    setSheetState("expanded");
   } else {
-    openSheet();
+    setSheetState("medium");
   }
 });
 

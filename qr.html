@@ -1,64 +1,65 @@
-
 <!doctype html>
 <html lang="sv">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Ta med dig konstvandringen</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/style.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script src="js/qr.js" type="module"></script>
-  </head>
+  <title>Ta med dig konstvandringen</title>
 
-  <body>
-    <main class="qr-page">
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="js/qr.js" type="module"></script>
+</head>
 
-      <header class="qr-header">
-        <a href="valj-rutt.html" class="back-link">
-          ← Tillbaka till rutter
+<body>
+  <main class="qr-page">
+
+    <header class="qr-header">
+      <a href="valj-rutt.html" class="back-link">
+        ← Tillbaka till rutter
+      </a>
+    </header>
+
+    <section class="qr-layout">
+
+      <div class="qr-information">
+        <p class="route-number">KONSTVANDRING I VÄXJÖ</p>
+
+        <h1>Ta med dig konstvandringen</h1>
+
+        <p class="qr-intro">
+          Skanna QR-koden med din mobil för att ta med dig rutten
+          och upptäcka konstverken längs vägen.
+        </p>
+
+        <div class="qr-route-info">
+          <p>DIN VALDA RUTT</p>
+          <h2 id="qr-route-title">Laddar rutt...</h2>
+          <span id="qr-artwork-count"></span>
+        </div>
+
+        <a href="#" id="back-to-route" class="route-button">
+          <span class="arrow-qr">←</span> Tillbaka till kartan
         </a>
-      </header>
+      </div>
 
-      <section class="qr-layout">
+      <div class="qr-card">
+        <div id="qr-code"></div>
 
-        <div class="qr-information">
-          <p class="route-number">KONSTVANDRING I VÄXJÖ</p>
+        <h2>Skanna och upptäck</h2>
 
-          <h1>Ta med dig konstvandringen</h1>
+        <p>
+          Rikta mobilkameran mot QR-koden för att öppna
+          konstvandringen i mobilen.
+        </p>
 
-          <p class="qr-intro">
-            Skanna QR-koden med din mobil för att ta med dig rutten
-            och upptäcka konstverken längs vägen.
-          </p>
+        <p id="qr-status" class="qr-status"></p>
+      </div>
 
-          <div class="qr-route-info">
-            <p>DIN VALDA RUTT</p>
-            <h2 id="qr-route-title">Laddar rutt...</h2>
-            <span id="qr-artwork-count"></span>
-          </div>
+    </section>
 
-          <a href="#" id="back-to-route" class="route-button">
-           <span class="arrow-qr">←</span> Tillbaka till kartan
-          </a>
-        </div>
+  </main>
+</body>
 
-        <div class="qr-card">
-          <div id="qr-code"></div>
-
-          <h2>Skanna och upptäck</h2>
-
-          <p>
-            Rikta mobilkameran mot QR-koden för att öppna
-            konstvandringen i mobilen.
-          </p>
-
-          <p id="qr-status" class="qr-status"></p>
-        </div>
-
-      </section>
-
-    </main>
-  </body>
 </html>

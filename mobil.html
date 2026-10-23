@@ -1,115 +1,92 @@
 <!doctype html>
 <html lang="sv">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Konstvandring i mobilen</title>
 
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    />
-    <link rel="stylesheet" href="css/mobil.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Konstvandring i mobilen</title>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script type="module" src="js/mobil.js"></script>
-  </head>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/mobil.css" />
 
-  <body>
-    <main class="mobile-app">
-      <header class="mobile-header">
-        <div>
-          <p class="mobile-eyebrow">KONSTVANDRING I VÄXJÖ</p>
-          <h1 id="route-title">Konstvandring</h1>
-          <p id="route-meta" class="route-meta"></p>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script type="module" src="js/mobil.js"></script>
+</head>
+
+<body>
+  <main class="mobile-app">
+    <header class="mobile-header">
+      <div>
+        <p class="mobile-eyebrow">KONSTVANDRING I VÄXJÖ</p>
+        <h1 id="route-title">Konstvandring</h1>
+        <p id="route-meta" class="route-meta"></p>
+      </div>
+    </header>
+
+    <div class="map-area">
+      <div id="mobile-map" role="application" aria-label="Karta över konstverken på rutten"></div>
+
+      <button id="locate-me" class="location-button" type="button" aria-pressed="false">
+        <span aria-hidden="true">◎</span>
+        <span id="locate-button-text">Följ min position</span>
+      </button>
+
+      <p id="location-status" class="location-status" aria-live="polite"></p>
+    </div>
+
+    <button id="sheet-backdrop" class="sheet-backdrop" type="button" aria-label="Stäng konstverksinformationen" aria-hidden="true" tabindex="-1"></button>
+
+    <section id="artwork-sheet" class="mobile-artwork-card" aria-live="polite" aria-expanded="false">
+      <button id="sheet-handle" class="sheet-handle" type="button" aria-label="Visa konstverksinformation" aria-expanded="false">
+        <span></span>
+      </button>
+
+      <div class="sheet-preview">
+        <div class="mobile-artwork-topline">
+          <p>AKTUELLT KONSTVERK</p>
+          <span id="preview-position"></span>
         </div>
-      </header>
 
-      <div class="map-area">
-        <div
-          id="mobile-map"
-          role="application"
-          aria-label="Karta över konstverken på rutten"
-        ></div>
-
-        <button
-          id="locate-me"
-          class="location-button"
-          type="button"
-          aria-pressed="false"
-        >
-          <span aria-hidden="true">◎</span>
-          <span id="locate-button-text">Följ min position</span>
+        <button id="sheet-open" class="sheet-open" type="button">
+          <span id="preview-title">Välj ett konstverk</span>
+          <span class="preview-cta">Visa information ↑</span>
         </button>
-
-        <p id="location-status" class="location-status" aria-live="polite"></p>
       </div>
 
-      <!-- Mörk bakgrund när popupen öppnas -->
-      <button
-        id="sheet-backdrop"
-        class="sheet-backdrop"
-        type="button"
-        aria-label="Stäng konstverksinformationen"
-        aria-hidden="true"
-        tabindex="-1"
-      ></button>
+      <div class="sheet-details">
 
-      <!-- Samma informationskort, nu som popup -->
-      <section
-        id="artwork-sheet"
-        class="mobile-artwork-card"
-        aria-live="polite"
-        aria-expanded="false"
-      >
-        <button
-          id="sheet-handle"
-          class="sheet-handle"
-          type="button"
-          aria-label="Visa konstverksinformation"
-          aria-expanded="false"
-        >
-          <span></span>
-        </button>
+        <div class="mobile-artwork-topline">
+          <p>AKTUELLT KONSTVERK</p>
 
-        <!-- Den lilla panelen som syns längst ned -->
-        <div class="sheet-preview">
-          <div class="mobile-artwork-topline">
-            <p>AKTUELLT KONSTVERK</p>
-            <span id="preview-position"></span>
-          </div>
-
-          <button id="sheet-open" class="sheet-open" type="button">
-            <span id="preview-title">Välj ett konstverk</span>
-            <span class="preview-cta">Visa information ↑</span>
+          <button id="sheet-close" class="sheet-close" type="button">
+            ×
           </button>
         </div>
 
-        <!-- Befintlig information, synlig när popupen öppnas -->
-        <div class="sheet-details">
-          <div class="mobile-artwork-topline">
-            <p>AKTUELLT KONSTVERK</p>
-
-            <button id="sheet-close" class="sheet-close" type="button">
-              ×
-            </button>
-          </div>
-
+        <div class="sheet-scroll-content">
           <h2 id="artwork-title">Välj ett konstverk</h2>
 
           <p id="artwork-meta"></p>
 
           <p id="artwork-description"></p>
 
+          <img src="img/0D527809-67AC-4C51-B405-540086A377F8_1_105_c.jpeg" id="artwork-image" class="mobile-artwork-image" alt="" hidden />
+
           <span id="artwork-position"></span>
-
-          <div class="mobile-artwork-controls">
-            <button id="previous-artwork" type="button">← Föregående</button>
-
-            <button id="next-artwork" type="button">Nästa konstverk →</button>
-          </div>
         </div>
-      </section>
-    </main>
-  </body>
+
+        <div class="mobile-artwork-controls">
+          <button id="previous-artwork" type="button">
+            ← Föregående
+          </button>
+
+          <button id="next-artwork" type="button">
+            Nästa konstverk →
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+
 </html>

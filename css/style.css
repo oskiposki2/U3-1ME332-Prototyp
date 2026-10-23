@@ -91,6 +91,8 @@ body {
   border: 2px solid;
   border-radius: 6px;
   padding: 6px;
+  max-height: 40px;
+  margin-top: 20px;
   color: #282624;
   text-decoration: none;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
@@ -202,18 +204,6 @@ body {
   max-height: 70px;
 }
 
-.overview-header h1 {
-  margin-top: 24px;
-  font-size: 40px;
-}
-
-.back-link {
-  color: #282624;
-  text-decoration: none;
-  max-height: 40px;
-  margin-top: 20px;
-}
-
 #map {
   width: 100%;
   height: 560px;
@@ -233,10 +223,6 @@ body {
   flex-shrink: 0;
   margin: 0;
   width: 400px;
-}
-
-#map-header {
-  display: flex;
 }
 
 #map-info {
@@ -362,12 +348,6 @@ body {
   cursor: pointer;
 }
 
-.sheet-label {
-  font-size: 12px;
-  letter-spacing: 1.5px;
-  font-weight: 700;
-}
-
 .sheet-content {
   display: flex;
   align-items: flex-start;
@@ -399,11 +379,8 @@ body {
 }
 
 .sheet-year {
-    position: relative;
-    padding-left: 16px;
-    margin: 0;
-    font-size: 17px;
-    line-height: 1.5;
+  position: relative;
+  padding-left: 16px;
 }
 
 .sheet-year::before {
@@ -459,13 +436,6 @@ body {
 .sheet-backdrop.is-open {
   opacity: 1;
   visibility: visible;
-}
-
-.sheet-navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
 }
 
 .sheet-navigation button {
@@ -556,15 +526,6 @@ body {
   color: #59564f;
 }
 
-.map-instruction.is-hidden {
-  opacity: 0;
-  transform: translateY(-8px);
-  max-height: 0;
-  margin-bottom: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
 /* Diskret puls runt den första konstverksmarkören */
 .artwork-marker-icon.marker-hint span {
   position: relative;
@@ -606,10 +567,6 @@ body {
 
 .cls-3 {
   fill: #333;
-}
-
-#pointer {
-  max-width: 50%;
 }
 
 /* QR-sidan */

@@ -33,7 +33,7 @@ export const routes = {
 
   "sjobris-skulpturer": {
     title: "Sjöbris & Skulpturer",
-    description: "En upptäcktsfärd bland konstverk runt Växjsjön. Här finns populära konstverk som ingår i skulpturstråket Växjö Art Site.",
+    description: "En upptäcktsfärd bland konstverk runt Växjösjön. Här finns populära konstverk som ingår i skulpturstråket Växjö Art Site.",
     artworkIds: [
       "art-001",
       "art-008",

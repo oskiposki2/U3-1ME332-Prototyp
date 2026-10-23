@@ -76,7 +76,10 @@ const routeArtworks = route.artworkIds
   .map(getArtworkInfo);
 
 // Skapa karta
-const map = L.map("mobile-map").setView([56.877, 14.811], 14);
+const map = L.map("mobile-map", {
+  zoomSnap: 0,
+  zoomDelta: 0.25,
+}).setView([56.877, 14.811], 14);
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
@@ -311,7 +314,11 @@ async function drawWalkingRoute() {
       },
     }).addTo(map);
 
-    map.fitBounds(routeLayer.getBounds().pad(0.12));
+    map.fitBounds(routeLayer.getBounds().pad(0.12), {
+      maxZoom: 15,
+      paddingTopLeft: [20, 20],
+      paddingBottomRight: [20, 100],
+    });
 
     const summary = geojson.features[0].properties?.summary;
 

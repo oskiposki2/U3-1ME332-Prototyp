@@ -7,6 +7,10 @@ const closeButton = document.querySelector("#sheet-close");
 const backdrop = document.querySelector("#sheet-backdrop");
 const takeRouteButton = document.querySelector("#take-route-button");
 
+const accessibilityToggle = document.querySelector("#accessibility-toggle");
+const accessibilityPanel = document.querySelector("#accessibility-panel");
+const accessibilityClose = document.querySelector("#accessibility-close");
+
 const sheetTitle = document.querySelector("#sheet-title");
 const sheetArtist = document.querySelector("#sheet-artist");
 const sheetYear = document.querySelector("#sheet-year");
@@ -19,12 +23,11 @@ const artworkCount = document.querySelector("#artwork-count");
 let currentArtworkIndex = -1;
 
 function showArtwork(artwork) {
-
   currentArtworkIndex = selectedArtworks.indexOf(artwork);
-  artworkCount.textContent =
-    `${currentArtworkIndex + 1} av ${selectedArtworks.length} konstverk`;
+  artworkCount.textContent = `${currentArtworkIndex + 1} av ${selectedArtworks.length} konstverk`;
 
-  sheetTitle.textContent = artwork.title || artwork.name || "Namnlöst konstverk";
+  sheetTitle.textContent =
+    artwork.title || artwork.name || "Namnlöst konstverk";
   sheetArtist.textContent = artwork.artist;
   sheetYear.textContent = artwork.year;
   sheetDescription.textContent = artwork.description;
@@ -47,6 +50,34 @@ function closeArtwork() {
 closeButton.addEventListener("click", closeArtwork);
 backdrop.addEventListener("click", closeArtwork);
 
+// Öppna tillgänglighetspanelen
+function openAccessibilityPanel() {
+  accessibilityPanel.hidden = false;
+  accessibilityToggle.setAttribute("aria-expanded", "true");
+
+  accessibilityClose.focus();
+}
+
+// Stäng tillgänglighetspanelen
+function closeAccessibilityPanel() {
+  accessibilityPanel.hidden = true;
+  accessibilityToggle.setAttribute("aria-expanded", "false");
+
+  accessibilityToggle.focus();
+}
+
+// Klicka på knappen för att öppna eller stänga panelen
+accessibilityToggle.addEventListener("click", () => {
+  if (accessibilityPanel.hidden) {
+    openAccessibilityPanel();
+  } else {
+    closeAccessibilityPanel();
+  }
+});
+
+// Stäng panelen med stängknappen
+accessibilityClose.addEventListener("click", closeAccessibilityPanel);
+
 // Den publika skärmens ungefärliga position
 const screenPosition = [56.87852, 14.80935];
 
@@ -57,8 +88,7 @@ const route = routes[routeId] || routes["statyrundan"];
 
 // Ge rätt URL till QR-sidan
 if (takeRouteButton) {
-  takeRouteButton.href =
-    `qr.html?route=${encodeURIComponent(routeId)}`;
+  takeRouteButton.href = `qr.html?route=${encodeURIComponent(routeId)}`;
 }
 
 // Visa information om rutten
@@ -66,20 +96,18 @@ document.querySelector("#route-title").textContent = route.title;
 document.querySelector("#route-description").textContent = route.description;
 
 // Hitta konstverken som hör till rutten
-const artworkById = new Map(
-  artworks.map(artwork => [artwork.id, artwork])
-);
+const artworkById = new Map(artworks.map((artwork) => [artwork.id, artwork]));
 
 const selectedArtworks = route.artworkIds
-  .map(id => artworkById.get(id))
+  .map((id) => artworkById.get(id))
   .filter(Boolean);
 
 function navigateArtwork(direction) {
   if (selectedArtworks.length === 0) return;
 
   currentArtworkIndex =
-    (currentArtworkIndex + direction + selectedArtworks.length)
-    % selectedArtworks.length;
+    (currentArtworkIndex + direction + selectedArtworks.length) %
+    selectedArtworks.length;
 
   showArtwork(selectedArtworks[currentArtworkIndex]);
 }
@@ -104,16 +132,16 @@ const map = L.map("map");
 // Lägg till OpenStreetMap
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
-  attribution: "&copy; OpenStreetMap contributors"
+  attribution: "&copy; OpenStreetMap contributors",
 }).addTo(map);
 
 // Style av "du är här"-markör
 function createScreenIcon() {
   return L.divIcon({
     className: "screen-marker",
-html: `<div class="screen-marker__label">Du är här</div>`,
-iconSize: [90, 38],
-iconAnchor: [45, 42],
+    html: `<div class="screen-marker__label">Du är här</div>`,
+    iconSize: [90, 38],
+    iconAnchor: [45, 42],
   });
 }
 
@@ -127,9 +155,7 @@ L.marker(screenPosition, {
 selectedArtworks.forEach((artwork, index) => {
   const icon = L.divIcon({
     className:
-      index === 0
-        ? "artwork-marker-icon marker-hint"
-        : "artwork-marker-icon",
+      index === 0 ? "artwork-marker-icon marker-hint" : "artwork-marker-icon",
     html: `<span>${index + 1}</span>`,
     iconSize: [36, 36],
     iconAnchor: [18, 18],
@@ -143,10 +169,10 @@ selectedArtworks.forEach((artwork, index) => {
 async function drawWalkingRoute() {
   // Start vid skärmen, genom konstverken och tillbaka.
   // Leaflet använder [latitud, longitud].
-const waypoints = [
-  screenPosition,
-  ...selectedArtworks.map(artwork => artwork.coordinates)
-];
+  const waypoints = [
+    screenPosition,
+    ...selectedArtworks.map((artwork) => artwork.coordinates),
+  ];
 
   // OpenRouteService kräver [longitud, latitud].
   const coordinates = waypoints.map(([lat, lon]) => [lon, lat]);
@@ -157,16 +183,18 @@ const waypoints = [
       {
         method: "POST",
         headers: {
-          "Authorization": ORS_API_KEY,
+          Authorization: ORS_API_KEY,
           "Content-Type": "application/json",
-          "Accept": "application/geo+json, application/json"
+          Accept: "application/geo+json, application/json",
         },
-        body: JSON.stringify({ coordinates })
-      }
+        body: JSON.stringify({ coordinates }),
+      },
     );
 
     if (!response.ok) {
-      throw new Error(`Routingfel: ${response.status} ${await response.text()}`);
+      throw new Error(
+        `Routingfel: ${response.status} ${await response.text()}`,
+      );
     }
 
     const geojson = await response.json();
@@ -176,13 +204,13 @@ const waypoints = [
       style: {
         color: "#0e36ff",
         weight: 5,
-        opacity: 0.85
-      }
+        opacity: 0.85,
+      },
     }).addTo(map);
 
     // Visa hela gångvägen.
     map.fitBounds(routeLayer.getBounds(), {
-      padding: [40, 40]
+      padding: [40, 40],
     });
 
     // Visa faktisk sträcka och beräknad tid om API:t returnerar dem.
@@ -190,14 +218,15 @@ const waypoints = [
 
     if (summary && metaElement) {
       const distance = document.createElement("span");
-      distance.textContent =
-        `${(summary.distance / 1000).toLocaleString("sv-SE", {
-          maximumFractionDigits: 1
-        })} km`;
+      distance.textContent = `${(summary.distance / 1000).toLocaleString(
+        "sv-SE",
+        {
+          maximumFractionDigits: 1,
+        },
+      )} km`;
 
       const duration = document.createElement("span");
-      duration.textContent =
-        `Ca ${Math.round(summary.duration / 60)} min`;
+      duration.textContent = `Ca ${Math.round(summary.duration / 60)} min`;
 
       metaElement.append(distance, duration);
     }
@@ -206,7 +235,7 @@ const waypoints = [
 
     // Visa åtminstone alla stopp om routingtjänsten inte fungerar.
     map.fitBounds(waypoints, {
-      padding: [40, 40]
+      padding: [40, 40],
     });
   }
 }

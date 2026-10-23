@@ -35,14 +35,46 @@
                     </svg></span>
 
                 <div class="instruction-copy">
-                    <strong>Upptäck konsten på kartan</strong>
-                    <p>Tryck på en numrerad markör för att läsa mer om konstverket.</p>
+                    <p>Tryck på en markör för att upptäcka konstverket</p>
                 </div>
             </div>
         </header>
 
         <section>
-            <div id="map"></div>
+            <div class="map-container">
+                <div id="map"></div>
+
+                <button id="accessibility-toggle" class="accessibility-toggle" type="button" aria-expanded="false" aria-controls="accessibility-panel">
+                    <span aria-hidden="true">ⓘ</span>
+                    Tillgänglighet
+                </button>
+
+                <aside id="accessibility-panel" class="accessibility-panel" aria-labelledby="accessibility-title" hidden>
+                    <div class="accessibility-panel-header">
+                        <h2 id="accessibility-title">Tillgänglighet för rutten</h2>
+
+                        <button id="accessibility-close" class="accessibility-close" type="button" aria-label="Stäng tillgänglighetsinformationen">
+                            ×
+                        </button>
+                    </div>
+
+                    <h3>Gångvägar och gågator</h3>
+                    <p>
+                        Rutten går genom stadsmiljö och följer gångvägar och gågator.
+                    </p>
+
+                    <h3>Framkomlighet</h3>
+                    <p>
+                        Underlag, lutningar, kantstenar och tillfälliga hinder kan påverka
+                        framkomligheten längs vägen.
+                    </p>
+
+                    <p class="accessibility-note">
+                        Rutten är inte fullständigt verifierad för rullstolsanvändning.
+                    </p>
+                </aside>
+            </div>
+
             <div id="map-info">
                 <div class="route-info">
                     <div class="route-info-top">

@@ -188,9 +188,11 @@ button {
 
 .mobile-artwork-topline {
   display: flex;
+  flex-shrink: 0;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
+  width: 100%;
 }
 
 .mobile-artwork-topline p {
@@ -199,6 +201,22 @@ button {
   font-weight: 700;
   letter-spacing: 0.1em;
 }
+
+.artwork-position-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#preview-position,
+#artwork-position {
+  flex-shrink: 0;
+  color: #625e58;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
 
 #preview-position,
 #artwork-position {
@@ -355,6 +373,14 @@ button {
 
 .mobile-artwork-controls button:hover:not(:disabled) {
   filter: brightness(0.96);
+}
+
+.mobile-artwork-controls #artwork-position {
+  align-self: center;
+  flex-shrink: 0;
+  white-space: nowrap;
+  color: #625e58;
+  font-size: 0.8rem;
 }
 
 /* Mindre mobilskärmar */

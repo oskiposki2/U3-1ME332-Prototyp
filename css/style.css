@@ -88,6 +88,8 @@ body {
   letter-spacing: 1.5px;
   font-weight: 600;
   margin-top: 0;
+  border-left: 1px solid;
+  padding-left: 5px;
 }
 
 .route-header {
@@ -147,6 +149,7 @@ body {
 
 .route-card-info {
   font-size: 18px;
+  margin-top: 0;
 }
 
 .route-meta {
@@ -217,7 +220,7 @@ body {
 }
 
 #map {
-  height: clamp(520px, 38vw, 650px);
+  height: clamp(520px, 38vw, 700px);
   min-height: 550px;
   border-radius: 14px;
 }
@@ -546,7 +549,7 @@ body {
   border: 6px dashed #ff0000;
   border-radius: 50%;
   pointer-events: none;
-  animation: marker-pulse 1.8s ease-out 6 forwards;
+  animation: marker-pulse 1.4s ease-out 12 forwards;
 }
 
 @keyframes marker-pulse {
@@ -741,7 +744,7 @@ body {
   align-items: center;
   gap: 8px;
 
-  padding: 10px 14px;
+  padding: 16px 18px;
   border: 1px solid #d8d3ca;
   border-radius: 10px;
 
@@ -757,6 +760,10 @@ body {
 
 .accessibility-toggle:hover {
   background: #f2efe7;
+}
+
+.accessibility-toggle span {
+  font-size: 18px;
 }
 
 /* Informationspanelen ovanpå kartan */

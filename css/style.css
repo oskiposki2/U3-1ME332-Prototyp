@@ -89,7 +89,7 @@ body {
   font-weight: 600;
   margin-top: 0;
   border-left: 1px solid;
-  padding-left: 5px;
+  padding-left: 10px;
 }
 
 .route-header {
@@ -220,7 +220,7 @@ body {
 }
 
 #map {
-  height: clamp(520px, 38vw, 700px);
+  height: clamp(550px, 38vw, 720px);
   min-height: 550px;
   border-radius: 14px;
 }
@@ -602,6 +602,7 @@ body {
   gap: 80px;
   max-width: 1800px;
   margin: 40px auto;
+  margin-top: 110px;
 }
 
 .qr-information h1 {

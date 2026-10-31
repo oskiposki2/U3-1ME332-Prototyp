@@ -522,8 +522,6 @@ button {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 60vh;
-  object-position: center;
-  border-radius: 12px;
-  background: transparent;
+  object-fit: contain;
+  border-radius: 8px;
 }

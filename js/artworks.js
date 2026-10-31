@@ -8,6 +8,7 @@ export const artworks = [
       "Två mjukt formade fantasigestalter vid Växjösjön. De är tänkta att samspela med träden, " +
       "sjön och människorna som passerar. Verken lyser också under dygnets mörka timmar.",
     coordinates: [56.875173, 14.809602],
+    image: "images/durus-mollis.jpg",
   },
   {
     id: "art-002",
@@ -19,6 +20,7 @@ export const artworks = [
       "i brons. Verket är tänkt som en plats att stanna och sitta en stund. Det uppmärksammar " +
       "mångfald, medmänsklighet och erfarenheten av att bygga upp en tillvaro på en ny plats.",
     coordinates: [56.869755, 14.815086],
+    image: "images/shade.jpg",
   },
   {
     id: "art-003",
@@ -30,6 +32,7 @@ export const artworks = [
       "Verket knyter an till den historiska erfarenheten av att lämna sin hembygd för att skapa " +
       "ett nytt liv på en annan plats.",
     coordinates: [56.867196, 14.816652],
+    image: "images/utvandrarna.jpg",
   },
   {
     id: "art-004",
@@ -41,6 +44,7 @@ export const artworks = [
       "vattnet, stranden och staden, så att omgivningen ständigt förändras i verkets yta. " +
       "Skulpturen är en hyllning till sjön och dess vatten.",
     coordinates: [56.87004, 14.805923],
+    image: "images/spegelbollen.jpg",
   },
   {
     id: "art-005",
@@ -59,10 +63,11 @@ export const artworks = [
       "En byst av botanikern Carl von Linné, placerad sydväst om Växjö domkyrka. " +
       "Linné studerade i Växjö från nio års ålder och avslutade sin gymnasietid här 1727.",
     coordinates: [56.876473, 14.810489],
+    image: "images/linnee.jpg",
   },
   {
     id: "art-007",
-    title: "Okänd titel",
+    title: "Triptyk",
     artist: "Anne-Karin Furunes",
     year: 2007,
     description:
@@ -71,6 +76,7 @@ export const artworks = [
       "upplevelsen. Verken knyter an till Carl von Linné och hans botaniska intresse. " +
       "Bland motiven i trädgården finns Linné själv samt ananas och banan.",
     coordinates: [56.862782, 14.820458],
+    image: "images/triptyk.jpg",
   },
   {
     id: "art-008",
@@ -82,6 +88,7 @@ export const artworks = [
       "vattenkran, som om trädet ger ifrån sig vatten på samma sätt som ett träd kan ge " +
       "ifrån sig sav. Blå belysning förstärker verkets uttryck när det är mörkt.",
     coordinates: [56.872886, 14.80937],
+    image: "images/drinking-tree.jpg",
   },
   {
     id: "art-009",
@@ -188,6 +195,7 @@ export const artworks = [
       "En bronsskulptur på strandpromenaden vid Växjösjön. Verket bygger på en liten " +
       "sittande figur av Allan Jäderås som har förstorats, dubblerats och omarbetats.",
     coordinates: [56.873985, 14.815463],
+    image: "images/tvillingar.jpg",
   },
   {
     id: "art-022",
@@ -234,6 +242,7 @@ export const artworks = [
       "exempel på hur offentlig konst kan ge en välbekant stadsmiljö " +
       "en egen karaktär och skapa små ögonblick av upptäckarglädje.",
     coordinates: [56.878774, 14.806116],
+    image: "images/tre-bockar.jpg",
   },
   {
     id: "art-026",
@@ -248,8 +257,9 @@ export const artworks = [
     title: "Dackes dröm",
     artist: "Carl Milles",
     year: 1954,
-    description: "",
+    description: "En skulpturmodell av Carl Milles med inspiration från Nils Dacke och Dackefejden. Dacke ligger i drömmen omgiven av förgrenade granar och små figurer som gestaltar striderna under upproret. Verket var tänkt att bli ett monument på Stortorget i Växjö, men den planerade fullskaliga skulpturen blev aldrig uppförd.",
     coordinates: [56.878058, 14.809849],
+    image: "images/dackes-drom.jpg",
   },
   {
     id: "art-028",
@@ -272,7 +282,7 @@ export const artworks = [
     id: "art-030",
     title: "Jag tänker på mig själv",
     artist: "Marianne Lindberg De Geer",
-    year: null,
+    year: 2005,
     description:
       "Skulpturgruppen består av två fristående kvinnogestalter i brons, vända mot varandra. " +
       "Den ena kroppen är mycket smal och den andra fylligare, och båda har konstnären " +
@@ -280,6 +290,7 @@ export const artworks = [
       "till Växjö och utmanar våra föreställningar om kroppsideal, skönhet och självbild. " +
       "Det bjuder in till att fundera över hur vi ser på oss själva och på andra.",
     coordinates: [56.880311, 14.802019],
+    image: "images/jag-tanker.jpg",
   },
   {
     id: "art-031",
@@ -291,6 +302,7 @@ export const artworks = [
       "betydelsefull förkämpe för nykterhetsrörelsen och var som ung student i Växjö " +
       "med och bildade en nykterhetsförening 1819.",
     coordinates: [56.876012, 14.810448],
+    image: "images/peter.jpg",
   },
   {
     id: "art-032",
@@ -310,6 +322,7 @@ export const artworks = [
       "hur vi söker kunskap: tratten fångar upp information från omvärlden, medan mönstren " +
       "på fundamentet för tankarna till kartor och en jordglob.",
     coordinates: [56.855028, 14.830528],
+    image: "images/princip.jpg",
   },
   {
     id: "art-034",
@@ -329,6 +342,7 @@ export const artworks = [
       "Titeln anknyter till kurragömmalek och barndomens minnen, samtidigt som figurerna " +
       "kan ge associationer till att söka skydd eller försöka fly.",
     coordinates: [56.853806, 14.8325],
+    image: "images/hide.jpg",
   },
   {
     id: "art-036",
@@ -349,6 +363,7 @@ export const artworks = [
       "till Kronoberg, däribland Vilhelm Moberg, Pär Lagerkvist och Elin Wägner. Titta ner " +
       "medan du promenerar och upptäck hur ord och tankar blir en del av stadens offentliga rum.",
     coordinates: [56.879824, 14.80392],
+    image: "images/citat.jpg",
   },
   {
     id: "art-038",
@@ -361,6 +376,7 @@ export const artworks = [
       "påminnelse om trygghet, gemenskap och människans behov av att höra till. Det " +
       "bjuder in till att fundera över hur även offentliga platser kan förmedla värme och omtanke.",
     coordinates: [56.86229, 14.807026],
+    image: "images/famn.jpg",
   },
   {
     id: "art-039",
@@ -404,6 +420,7 @@ export const artworks = [
       "vetenskapsmän. Citaten kommer från olika tider och kunskapsområden och gör verket " +
       "till en hyllning till litteratur, idéer och kunskap.",
     coordinates: [56.855611, 14.830083],
+    image: "images/boken.jpg",
   },
   {
     id: "art-044",
@@ -416,6 +433,7 @@ export const artworks = [
       "skogen präglar landskapet och finns nära även mitt i en campusmiljö. Det påminner " +
       "om mötet mellan natur och stad och om allt det som kan upptäckas när man tar sig tid.",
     coordinates: [56.855389, 14.830528],
+    image: "images/skog.jpg",
   },
   {
     id: "art-045",
@@ -536,6 +554,7 @@ export const artworks = [
       "över vad som finns på andra sidan. När man närmar sig och passerar förbi kan " +
       "perspektivet förändras – och platsen få en annan betydelse.",
     coordinates: [56.88137, 14.80691],
+    image: "images/portal.jpg",
   },
   {
     id: "art-059",
@@ -576,6 +595,7 @@ export const artworks = [
     year: null,
     description: "",
     coordinates: [56.897056, 14.807123],
+    image: "images/famn.jpg",
   },
   {
     id: "art-064",
@@ -595,7 +615,8 @@ export const artworks = [
       "Björnen har blivit en välbekant symbol för Växjö kommunhus och är uppskattad " +
       "av både besökare och medarbetare. Med sin kraftfulla närvaro påminner den om " +
       "djurlivet i den svenska naturen och ger platsen en tydlig karaktär.",
-    coordinates: [56.88155, 14.802265],
+    coordinates: [56.876872, 14.807840],
+    image: "images/slagbjorn.jpg",
   },
   {
     id: "art-066",
@@ -711,6 +732,7 @@ export const artworks = [
       "gräsklädda kullar i olika storlekar som besökare kan klättra upp på. Verket är " +
       "tänkt att användas och upplevas, inte bara betraktas.",
     coordinates: [56.858345, 14.827212],
+    image: "images/tippen.jpg",
   },
   {
     id: "art-080",
@@ -723,6 +745,7 @@ export const artworks = [
       "föra tankarna till tyg, hår eller vågor. Figuren tycks befinna sig någonstans " +
       "mellan människa och natur – mer som ett mytiskt väsen än ett traditionellt porträtt.",
     coordinates: [56.877676, 14.804918],
+    image: "images/najad.jpg",
   },
   {
     id: "art-081",
@@ -734,6 +757,7 @@ export const artworks = [
       "domprostgården. Moberg är framför allt känd för Utvandrarna, romansviten om " +
       "människor från Småland som emigrerar till Nordamerika.",
     coordinates: [56.875797, 14.808972],
+    image: "images/vilhelm.jpg",
   },
   {
     id: "art-082",
@@ -745,6 +769,7 @@ export const artworks = [
       "och hans tre systersöner, som enligt traditionen följde honom under hans " +
       "missionsresor när han spred kristendomen i Sverige.",
     coordinates: [56.877349, 14.811297],
+    image: "images/sankt-sigfrid.jpg",
   },
   {
     id: "art-083",
@@ -797,6 +822,7 @@ export const artworks = [
       "kan lämna märken i en stad. Verket blir en lekfull påminnelse om spår, minnen " +
       "och beslut som tillsammans formar vår gemensamma miljö.",
     coordinates: [56.879742, 14.810618],
+    image: "images/stampelverket.jpg",
   },
   {
     id: "art-089",
@@ -809,6 +835,7 @@ export const artworks = [
       "Titeln väcker frågan om hur vardagliga material kan få ett nytt uttryck när de " +
       "sätts samman. Stanna upp en stund och föreställ dig vilken klang en sådan orkester skulle kunna ha.",
     coordinates: [56.880537, 14.81244],
+    image: "images/rororkestern.jpg",
   },
   {
     id: "art-090",
@@ -819,6 +846,7 @@ export const artworks = [
       "En mosaik på Klostergatan som anknyter till Nils Dacke. Han ledde Smålandsupproret " +
       "mot Gustav Vasa 1542, en konflikt som kommit att kallas Dackefejden.",
     coordinates: [56.880353, 14.807689],
+    image: "images/dacke-ting.jpg",
   },
   {
     id: "art-091",
@@ -862,6 +890,7 @@ export const artworks = [
       "hyllar Elin Wägners kamp för feminism, pacifism och ekologi. Vattenflödet och " +
       "den oväntade formen utmanar normer och symboliserar växtkraft och rätten att ta plats.",
     coordinates: [56.86275, 14.813511],
+    image: "images/pissed-elin.jpg",
   },
   {
     id: "art-096",
@@ -873,6 +902,7 @@ export const artworks = [
       "åldrar, språk och erfarenheter. Genom kroppsspråk och gester utforskar verket " +
       "kommunikation, tillhörighet och människors möjligheter att förstå varandra.",
     coordinates: [56.861356, 14.811147],
+    image: "images/alla-ar.jpg",
   },
   {
     id: "art-097",
@@ -893,5 +923,6 @@ export const artworks = [
       "interagera med konstverket och varandra. Genom lekfulla former vill Hein skapa " +
       "oväntade möten, väcka nyfikenhet och göra vardagsmiljön till en plats för samtal och gemenskap.",
     coordinates: [56.85821153038375, 14.830201329815674],
+    image: "images/social-bench.jpg",
   },
 ];

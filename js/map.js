@@ -15,6 +15,7 @@ const sheetTitle = document.querySelector("#sheet-title");
 const sheetArtist = document.querySelector("#sheet-artist");
 const sheetYear = document.querySelector("#sheet-year");
 const sheetDescription = document.querySelector("#sheet-description");
+const sheetImage = document.querySelector("#sheet-image")
 
 const previousButton = document.querySelector("#previous-artwork");
 const nextButton = document.querySelector("#next-artwork");
@@ -31,6 +32,7 @@ function showArtwork(artwork) {
   sheetArtist.textContent = artwork.artist;
   sheetYear.textContent = artwork.year;
   sheetDescription.textContent = artwork.description;
+  sheetImage.src = artwork.image;
 
   sheet.classList.add("is-open");
   backdrop.classList.add("is-open");

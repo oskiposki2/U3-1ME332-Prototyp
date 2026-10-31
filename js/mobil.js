@@ -22,6 +22,7 @@ const previewTitle = document.querySelector("#preview-title");
 const artworkTitle = document.querySelector("#artwork-title");
 const artworkMeta = document.querySelector("#artwork-meta");
 const artworkDescription = document.querySelector("#artwork-description");
+const artworkImage = document.querySelector("#artwork-image")
 
 const sheet = document.querySelector("#artwork-sheet");
 const backdrop = document.querySelector("#sheet-backdrop");
@@ -61,6 +62,7 @@ function getArtworkInfo(artwork) {
       artwork.description ||
       "Det finns ingen ytterligare information om konstverket.",
     coordinates: artwork.coordinates,
+    image: artwork.image,
   };
 }
 
@@ -456,6 +458,8 @@ function selectArtwork(index, moveMap = true, openPopup = true) {
     .join(" · ");
 
   artworkDescription.textContent = artwork.description;
+
+  artworkImage.src = artwork.image;
 
   const position = `${currentIndex + 1} av ${routeArtworks.length}`;
   artworkPosition.textContent = position;

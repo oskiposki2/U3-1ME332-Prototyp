@@ -6,7 +6,7 @@ export const routes = {
       "art-025",
       "art-090",
       "art-088",
-      "art-028",
+      "art-027",
       "art-082",
       "art-006",
       "art-031",
@@ -21,13 +21,11 @@ export const routes = {
       "art-088", // Stämpelverket
       "art-089", // Rörorkestern
       "art-058", // Portal
-      "art-049", // Uttern
-      "art-065", // Slagbjörn
       "art-030", // Jag tänker på mig själv
       "art-037", // Citat i gatan
       "art-025", // Tre bockar
       "art-080", // Najad
-      "art-024", // Granitmonolit
+      "art-065", // Slagbjörn
     ],
   },
 
@@ -43,7 +41,7 @@ export const routes = {
       "art-095",
       "art-003",
       "art-002",
-      "art-022",
+      "art-021",
     ],
   },
 
@@ -61,7 +59,6 @@ export const routes = {
       "art-044",
       "art-033",
       "art-035",
-      "art-045",
     ],
   },
 };

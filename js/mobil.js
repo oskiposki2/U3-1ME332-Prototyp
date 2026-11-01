@@ -22,7 +22,7 @@ const previewTitle = document.querySelector("#preview-title");
 const artworkTitle = document.querySelector("#artwork-title");
 const artworkMeta = document.querySelector("#artwork-meta");
 const artworkDescription = document.querySelector("#artwork-description");
-const artworkImage = document.querySelector("#artwork-image")
+const artworkImage = document.querySelector("#artwork-image");
 
 const sheet = document.querySelector("#artwork-sheet");
 const backdrop = document.querySelector("#sheet-backdrop");
@@ -89,7 +89,6 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
 }).addTo(map);
 
-
 /* GPS – följ besökarens position */
 
 // Hämta GPS-elementen från HTML
@@ -115,15 +114,9 @@ function updateLocationButton() {
     locateButtonText.textContent = "Följ min position";
   }
 
-  locateButton.setAttribute(
-    "aria-pressed",
-    String(isFollowingLocation),
-  );
+  locateButton.setAttribute("aria-pressed", String(isFollowingLocation));
 
-  locateButton.classList.toggle(
-    "is-active",
-    isFollowingLocation,
-  );
+  locateButton.classList.toggle("is-active", isFollowingLocation);
 }
 
 // Skapa eller uppdatera den blå positionsmarkören
@@ -188,11 +181,7 @@ function centerOnUser() {
   if (!lastUserLatLng) return;
 
   if (!hasCenteredOnUser) {
-    map.setView(
-      lastUserLatLng,
-      Math.max(map.getZoom(), 16),
-      { animate: true },
-    );
+    map.setView(lastUserLatLng, Math.max(map.getZoom(), 16), { animate: true });
 
     hasCenteredOnUser = true;
   } else {
@@ -202,10 +191,7 @@ function centerOnUser() {
 
 // Avsluta GPS-spårningen och rensa markörerna
 function stopLocationFollowing(message = "") {
-  if (
-    locationWatchId !== null &&
-    navigator.geolocation
-  ) {
+  if (locationWatchId !== null && navigator.geolocation) {
     navigator.geolocation.clearWatch(locationWatchId);
   }
 
@@ -242,8 +228,7 @@ function handleLocationError(error) {
         "Din position kunde inte hittas. Kontrollera mobilens platsinställningar.";
       break;
     case 3:
-      message =
-        "Det tog för lång tid att hitta din position. Försök igen.";
+      message = "Det tog för lång tid att hitta din position. Försök igen.";
       break;
     default:
       message = "GPS fungerar inte just nu. Försök igen.";
@@ -290,9 +275,7 @@ locateButton.addEventListener("click", () => {
 
   // Om användaren följs: stäng av GPS-följningen
   if (isFollowingLocation) {
-    stopLocationFollowing(
-      "Positionsföljningen är avstängd.",
-    );
+    stopLocationFollowing("Positionsföljningen är avstängd.");
     return;
   }
 
@@ -308,10 +291,7 @@ locateButton.addEventListener("click", () => {
 // Pausa automatisk centrering när användaren drar i kartan.
 // GPS-markören fortsätter att uppdateras.
 map.on("dragstart", () => {
-  if (
-    !isFollowingLocation ||
-    locationWatchId === null
-  ) {
+  if (!isFollowingLocation || locationWatchId === null) {
     return;
   }
 
@@ -321,7 +301,6 @@ map.on("dragstart", () => {
   locationStatus.textContent =
     "Kartföljningen är pausad. Tryck på knappen för att följa din position igen.";
 });
-
 
 // Markörer
 let currentIndex = 0;
@@ -343,7 +322,6 @@ function createMarkerIcon(number, isActive) {
 // Panelens tre lägen
 let currentSheetState = "compact";
 
-
 function keepMarkerVisible(artwork) {
   if (currentSheetState === "expanded") return;
 
@@ -362,9 +340,7 @@ function keepMarkerVisible(artwork) {
   const targetY = visibleHeight / 2;
 
   // Markörens nuvarande position på kartan
-  const markerPoint = map.latLngToContainerPoint(
-    artwork.coordinates,
-  );
+  const markerPoint = map.latLngToContainerPoint(artwork.coordinates);
 
   // Beräkna hur mycket kartan behöver flyttas i båda riktningarna
   const shiftX = markerPoint.x - targetX;
@@ -379,7 +355,6 @@ function keepMarkerVisible(artwork) {
     animate: true,
   });
 }
-
 
 function setSheetState(state) {
   if (!["compact", "medium", "expanded"].includes(state)) {
@@ -590,6 +565,7 @@ let startPanelHeight = 0;
 let startScrollTop = 0;
 let isDraggingPanel = false;
 let ignorePanelClickUntil = 0;
+let touchStartedOnHandle = false;
 
 const compactHeight = 160;
 
@@ -655,6 +631,7 @@ sheet.addEventListener(
     }
 
     touchStartY = event.touches[0].clientY;
+    touchStartedOnHandle = event.target.closest("#sheet-handle") !== null;
     startPanelHeight = sheet.getBoundingClientRect().height;
     startScrollTop = sheet.querySelector(".sheet-scroll-content").scrollTop;
     isDraggingPanel = false;
@@ -688,7 +665,7 @@ sheet.addEventListener(
       } else if (
         currentSheetState === "expanded" &&
         movement < 0 &&
-        atTopOfContent
+        (atTopOfContent || touchStartedOnHandle)
       ) {
         isDraggingPanel = true;
       }

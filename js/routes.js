@@ -45,7 +45,7 @@ export const routes = {
     ],
   },
 
-  "trummens-pärlor": {
+  "city-campus": {
     title: "Från City till Campus",
     description: "Skulpturer och konstverk i en rutt som sträcker sig från innerstaden ner till Campus på Linnéuniversitet.",
     artworkIds: [
